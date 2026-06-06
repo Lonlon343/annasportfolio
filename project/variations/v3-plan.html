@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<title>Anna — Architektur</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="../assets/base.css" />
+<script src="../assets/image-slot.js"></script>
+<style>
+:root {
+  --paper: #fafaf7;
+  --ink: #0e0e0e;
+  --rule: rgba(14,14,14,0.16);
+  --soft: rgba(14,14,14,0.55);
+  --grid: rgba(14,14,14,0.05);
+}
+
+body {
+  font-size: 16px;
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 32px 32px,
+    var(--paper);
+  font-feature-settings: "kern" 1, "ss01" 1;
+}
+
+/* Header */
+header.site {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 64px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 32px;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ink);
+  z-index: 60;
+  font-family: 'Alte Haas Grotesk', sans-serif;
+}
+.brand {
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  justify-self: start;
+}
+.center-tag {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+nav.primary {
+  display: flex;
+  gap: 28px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  justify-self: end;
+}
+nav.primary a { padding: 6px 0; color: var(--soft); transition: color .25s ease; position: relative; }
+nav.primary a.active, nav.primary a:hover { color: var(--ink); }
+nav.primary a.active::after {
+  content: ""; position: absolute; inset: auto 0 -2px 0; height: 1px; background: var(--ink);
+}
+
+main { padding-top: 64px; }
+
+.page { display: none; }
+.page.active { display: block; }
+
+/* Sheet wrapper — looks like an architectural sheet */
+.sheet {
+  max-width: 1500px;
+  margin: 32px auto;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  position: relative;
+}
+
+.sheet-titleblock {
+  display: grid;
+  grid-template-columns: 80px 1fr 200px 200px 120px;
+  border-bottom: 1px solid var(--ink);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.sheet-titleblock > div {
+  padding: 14px 16px;
+  border-right: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sheet-titleblock > div:last-child { border-right: 0; }
+.sheet-titleblock .lbl { color: var(--soft); font-size: 9px; }
+.sheet-titleblock .val { color: var(--ink); }
+
+/* Intro */
+.intro-block {
+  padding: 80px 56px 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  border-bottom: 1px solid var(--rule);
+  align-items: end;
+}
+.intro-block h1 {
+  font-size: clamp(48px, 6.4vw, 104px);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  margin: 0;
+  font-weight: 400;
+  text-wrap: balance;
+}
+.intro-block .lede {
+  font-size: 18px;
+  line-height: 1.55;
+  max-width: 44ch;
+  margin: 0;
+  text-wrap: pretty;
+}
+.intro-block .small {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin-bottom: 16px;
+}
+
+/* Project drafts */
+.drafts {
+  padding: 0;
+}
+.draft-row {
+  display: grid;
+  grid-template-columns: 220px 1fr 200px 220px 80px;
+  align-items: center;
+  border-bottom: 1px solid var(--rule);
+  padding: 28px 56px;
+  cursor: pointer;
+  position: relative;
+  transition: background .2s ease, padding-left .25s ease;
+}
+.draft-row:hover { background: var(--ink); color: var(--paper); }
+.draft-row:hover .num, .draft-row:hover .meta, .draft-row:hover .leader, .draft-row:hover .ticker { color: var(--paper); }
+.draft-row:hover .leader { border-bottom-color: rgba(250,250,247,0.4); }
+.draft-row:hover .ticker { border-color: var(--paper); background: var(--paper); color: var(--ink); }
+
+.draft-row .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--soft);
+}
+.draft-row .title-cell {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  min-width: 0;
+}
+.draft-row .title {
+  font-size: clamp(28px, 3.4vw, 48px);
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+.draft-row .leader {
+  flex: 1;
+  height: 1px;
+  border-bottom: 1px dotted var(--rule);
+  transform: translateY(-4px);
+}
+.draft-row .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.draft-row .ticker {
+  width: 36px; height: 36px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  justify-self: end;
+  display: grid; place-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  transition: all .2s ease;
+}
+
+/* Bottom strip with key + scale info */
+.sheet-foot {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.sheet-foot > div {
+  padding: 14px 16px;
+  border-right: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sheet-foot > div:last-child { border-right: 0; }
+.sheet-foot .lbl { color: var(--soft); font-size: 9px; }
+
+/* Expander overlay */
+.expander {
+  position: fixed;
+  z-index: 100;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.001;
+}
+.expander.opening {
+  transition: top .65s cubic-bezier(.7,0,.2,1), left .65s cubic-bezier(.7,0,.2,1), width .65s cubic-bezier(.7,0,.2,1), height .65s cubic-bezier(.7,0,.2,1), opacity .25s ease;
+}
+.expander.open {
+  top: 16px !important;
+  left: 16px !important;
+  width: calc(100vw - 32px) !important;
+  height: calc(100vh - 32px) !important;
+  pointer-events: auto;
+  opacity: 1;
+}
+.expander.closing {
+  transition: top .55s cubic-bezier(.7,0,.2,1), left .55s cubic-bezier(.7,0,.2,1), width .55s cubic-bezier(.7,0,.2,1), height .55s cubic-bezier(.7,0,.2,1), opacity .35s ease .25s;
+  opacity: 0;
+}
+.expander-inner {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity .35s ease .3s;
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 32px 32px,
+    var(--paper);
+}
+.expander.open .expander-inner { opacity: 1; }
+
+.exp-titleblock {
+  position: sticky; top: 0; z-index: 5;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 16px 32px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.close-btn {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.close-btn::before {
+  content: ""; width: 14px; height: 14px;
+  background:
+    linear-gradient(currentColor,currentColor) center/100% 1px no-repeat,
+    linear-gradient(currentColor,currentColor) center/1px 100% no-repeat;
+  transform: rotate(45deg);
+}
+
+.exp-hero {
+  padding: 56px 56px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  border-bottom: 1px solid var(--ink);
+  align-items: end;
+}
+.exp-hero h2 {
+  font-size: clamp(48px, 7vw, 112px);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  margin: 0;
+  font-weight: 400;
+  text-wrap: balance;
+}
+.spec-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  border: 1px solid var(--ink);
+}
+.spec-table > div {
+  padding: 14px 16px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.spec-table > div:nth-child(2n) { border-right: 0; }
+.spec-table > div:nth-last-child(-n+2) { border-bottom: 0; }
+.spec-table dt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin: 0 0 4px;
+}
+.spec-table dd { margin: 0; font-size: 15px; }
+
+.exp-cover {
+  width: 100%;
+  height: 70vh;
+  min-height: 480px;
+  display: block;
+  border-bottom: 1px solid var(--ink);
+}
+
+.exp-text {
+  padding: 64px 56px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 64px;
+  border-bottom: 1px solid var(--ink);
+}
+.exp-text .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.exp-text p { font-size: 18px; line-height: 1.6; margin: 0 0 1em; max-width: 60ch; text-wrap: pretty; }
+
+.exp-plates {
+  padding: 56px;
+}
+.exp-plates h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--soft);
+  margin: 0 0 24px;
+}
+.plate-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+.plate {
+  border: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+}
+.plate-img { aspect-ratio: 4/3; flex: 1; display: block; }
+.plate-cap {
+  border-top: 1px solid var(--ink);
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.plate-cap .pn { color: var(--soft); }
+.plate:nth-child(1) { grid-column: span 4; }
+.plate:nth-child(1) .plate-img { aspect-ratio: 16/9; }
+.plate:nth-child(2) { grid-column: span 2; }
+.plate:nth-child(2) .plate-img { aspect-ratio: 3/4; }
+.plate:nth-child(3) { grid-column: span 2; }
+.plate:nth-child(4) { grid-column: span 2; }
+.plate:nth-child(5) { grid-column: span 2; }
+
+/* ÜBER UNS */
+.cv-sheet {
+  max-width: 1300px;
+  margin: 32px auto 100px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+}
+.cv-titleblock {
+  display: grid;
+  grid-template-columns: 1fr 200px 200px 120px;
+  border-bottom: 1px solid var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.cv-titleblock > div { padding: 14px 16px; border-right: 1px solid var(--ink); display: flex; flex-direction: column; gap: 4px; }
+.cv-titleblock > div:last-child { border-right: 0; }
+.cv-titleblock .lbl { color: var(--soft); font-size: 9px; }
+
+.cv-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  padding: 56px;
+  border-bottom: 1px solid var(--ink);
+  align-items: end;
+}
+.cv-hero h1 { font-size: clamp(48px, 6vw, 96px); line-height: 0.96; letter-spacing: -0.03em; margin: 0; font-weight: 400; }
+.cv-hero p { font-size: 18px; line-height: 1.55; max-width: 50ch; margin: 0; text-wrap: pretty; }
+.cv-hero .small { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--soft); margin-bottom: 16px; }
+.cv-hero image-slot { width: 220px; aspect-ratio: 3/4; margin-bottom: 16px; display: block; border: 1px solid var(--ink); }
+
+.cv-block {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  border-bottom: 1px solid var(--rule);
+}
+.cv-block:last-child { border-bottom: 0; }
+.cv-block > h2 {
+  margin: 0;
+  padding: 32px 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--ink);
+  border-right: 1px solid var(--rule);
+  background: var(--paper);
+}
+.cv-block-body { padding: 32px 32px; display: grid; gap: 24px; }
+.cv-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  align-items: baseline;
+}
+.cv-item .when {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--soft);
+}
+.cv-item .what { font-size: 17px; line-height: 1.5; }
+.cv-item .what .role { display: block; font-size: 13px; color: var(--soft); margin-top: 4px; }
+
+.skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.skill-block .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--soft); margin-bottom: 6px; }
+.skill-block .val { font-size: 17px; line-height: 1.4; }
+
+.langs { display: grid; gap: 12px; }
+.lang-row {
+  display: grid;
+  grid-template-columns: 1fr 140px 200px;
+  align-items: center;
+  font-size: 16px;
+}
+.lang-row .lvl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--soft); }
+.lang-row .bar { height: 1px; background: var(--rule); position: relative; }
+.lang-row .bar::after { content: ""; position: absolute; inset: -1px auto auto 0; height: 3px; background: var(--ink); width: var(--p,50%); }
+
+.contact-block { display: grid; gap: 10px; font-size: 17px; }
+.contact-block a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+footer.site {
+  border-top: 1px solid var(--ink);
+  padding: 14px 32px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--soft);
+  background: var(--paper);
+}
+
+@media (max-width: 900px) {
+  header.site { padding: 0 16px; }
+  .center-tag { display: none; }
+  .sheet { margin: 16px; }
+  .sheet-titleblock { grid-template-columns: 1fr 1fr; }
+  .sheet-titleblock > div { border-bottom: 1px solid var(--ink); }
+  .intro-block { grid-template-columns: 1fr; padding: 40px 24px; gap: 24px; }
+  .draft-row { grid-template-columns: 1fr 60px; padding: 20px 24px; gap: 12px; }
+  .draft-row .num, .draft-row .leader, .draft-row .meta { display: none; }
+  .draft-row .title-cell { grid-column: 1; }
+  .sheet-foot { grid-template-columns: 1fr 1fr; }
+  .sheet-foot > div { border-bottom: 1px solid var(--ink); }
+  .exp-hero { grid-template-columns: 1fr; padding: 32px 24px; gap: 24px; }
+  .exp-text { grid-template-columns: 1fr; padding: 32px 24px; gap: 16px; }
+  .exp-plates { padding: 32px 24px; }
+  .plate-grid { grid-template-columns: 1fr; }
+  .plate { grid-column: span 1 !important; }
+  .cv-hero { grid-template-columns: 1fr; padding: 32px 24px; gap: 24px; }
+  .cv-block { grid-template-columns: 1fr; }
+  .cv-block > h2 { border-right: 0; border-bottom: 1px solid var(--rule); padding: 16px 24px; }
+  .cv-block-body { padding: 24px; }
+  .cv-item { grid-template-columns: 1fr; gap: 4px; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .lang-row { grid-template-columns: 1fr 100px; }
+  .lang-row .bar { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="#projekte" data-route="projekte">Anna</a>
+  <span class="center-tag">Portfolio · 2026 · v.1.0</span>
+  <nav class="primary">
+    <a href="#projekte" data-route="projekte" class="active">Projekte</a>
+    <a href="#ueber" data-route="ueber">Über uns</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ======== PROJEKTE ======== -->
+<section class="page active" id="page-projekte" data-screen-label="01 Projekte (Plan)">
+  <div class="sheet">
+    <div class="sheet-titleblock">
+      <div><span class="lbl">Sheet</span><span class="val">A.000</span></div>
+      <div><span class="lbl">Title</span><span class="val">Werkverzeichnis — Index</span></div>
+      <div><span class="lbl">Issue</span><span class="val">Mai 2026</span></div>
+      <div><span class="lbl">Author</span><span class="val">A. Paraminski</span></div>
+      <div><span class="lbl">Scale</span><span class="val">1:1</span></div>
+    </div>
+
+    <div class="intro-block">
+      <div>
+        <p class="small">Werkverzeichnis · 03 Arbeiten · 2024 — 2026</p>
+        <h1>Architektur,<br />gemessen<br />in Maßstab.</h1>
+      </div>
+      <p class="lede">Eine kuratierte Auswahl meiner Studienarbeiten an der Hochschule Coburg. Klicke auf eine Position, um Pläne, Modelle und den Entwurfsprozess zu öffnen.</p>
+    </div>
+
+    <div class="drafts" id="draftList">
+      <div class="draft-row" data-project="glaspalast">
+        <span class="num">A.001 · STUDIENARBEIT</span>
+        <div class="title-cell">
+          <span class="title">Glaspalast Erlangen</span>
+          <span class="leader"></span>
+        </div>
+        <span class="meta">2024</span>
+        <span class="meta">Erlangen, DE</span>
+        <span class="ticker">+</span>
+      </div>
+      <div class="draft-row" data-project="kloster">
+        <span class="num">A.002 · ENTWURF</span>
+        <div class="title-cell">
+          <span class="title">Kloster Mönchröden</span>
+          <span class="leader"></span>
+        </div>
+        <span class="meta">2025</span>
+        <span class="meta">Mönchröden, DE</span>
+        <span class="ticker">+</span>
+      </div>
+      <div class="draft-row" data-project="bachelor">
+        <span class="num">A.003 · THESIS</span>
+        <div class="title-cell">
+          <span class="title">Bachelorarbeit</span>
+          <span class="leader"></span>
+        </div>
+        <span class="meta">2026</span>
+        <span class="meta">In Arbeit</span>
+        <span class="ticker">+</span>
+      </div>
+    </div>
+
+    <div class="sheet-foot">
+      <div><span class="lbl">North</span><span>↑ N</span></div>
+      <div><span class="lbl">Drawn by</span><span>A.P.</span></div>
+      <div><span class="lbl">Sheet</span><span>A.000 / 003</span></div>
+      <div><span class="lbl">Status</span><span>Ongoing</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ÜBER UNS ======== -->
+<section class="page" id="page-ueber" data-screen-label="02 Über uns (Plan)">
+  <div class="cv-sheet">
+    <div class="cv-titleblock">
+      <div><span class="lbl">Sheet</span><span>B.000 — CV</span></div>
+      <div><span class="lbl">Issue</span><span>Mai 2026</span></div>
+      <div><span class="lbl">Author</span><span>A. Paraminski</span></div>
+      <div><span class="lbl">Scale</span><span>1:1</span></div>
+    </div>
+
+    <div class="cv-hero">
+      <div>
+        <p class="small">Curriculum Vitae</p>
+        <h1>Ana<br />Paraminski.</h1>
+      </div>
+      <div>
+        <image-slot id="v3-portrait" shape="rect" placeholder="Portrait"></image-slot>
+        <p>Architektur, geboren aus dem Bauen mit den Händen — von der Baustelle bis zum Wettbewerbsmodell. Im siebten Semester an der Hochschule Coburg, derzeit in der Bachelorarbeit.</p>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h2>01 — Ausbildung</h2>
+      <div class="cv-block-body">
+        <div class="cv-item"><span class="when">10/2022 — 07/2026</span><span class="what">Architektur, B.A.<span class="role">Hochschule Coburg</span></span></div>
+        <div class="cv-item"><span class="when">2014 — 2022</span><span class="what">Abitur<span class="role">Helene-Lange-Gymnasium Fürth</span></span></div>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h2>02 — Berufserfahrung</h2>
+      <div class="cv-block-body">
+        <div class="cv-item"><span class="when">04/2025 — 08/2026</span><span class="what">Stud. Hilfskraft, International Office<span class="role">Hochschule Coburg — Eventplanung &amp; -durchführung, interkulturelle Kompetenzen</span></span></div>
+        <div class="cv-item"><span class="when">10/2024 — 03/2025</span><span class="what">Praktikum<span class="role">HOLODECK architects ZT GmbH, Wien — Architekturwettbewerbe, Ausstellungsplanung &amp; -gestaltung</span></span></div>
+        <div class="cv-item"><span class="when">02/2024 — 03/2024</span><span class="what">Baustellenpraktikum<span class="role">Holzbau Wunner, Emskirchen — Zimmererarbeiten, Denkmalsanierung</span></span></div>
+        <div class="cv-item"><span class="when">08/2023 — 09/2023</span><span class="what">Baustellenpraktikum<span class="role">GS Schenk, Fürth — hoch- und tiefbauliche Arbeiten (viel Beton)</span></span></div>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h2>03 — Auszeichnungen<br />&amp; Engagement</h2>
+      <div class="cv-block-body">
+        <div class="cv-item"><span class="when">04/2024 — 09/2026</span><span class="what">Deutschlandstipendium<span class="role">Stipendiatin</span></span></div>
+        <div class="cv-item"><span class="when">08/2023 — 07/2024</span><span class="what">Dienstagsreihe Coburg<span class="role">Organisationsleitung — dienstagsreihe-coburg.de</span></span></div>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h2>04 — Kenntnisse</h2>
+      <div class="cv-block-body">
+        <div class="skills-grid">
+          <div class="skill-block"><div class="label">CAD</div><div class="val">ArchiCAD, AutoCAD</div></div>
+          <div class="skill-block"><div class="label">BIM</div><div class="val">BIMmTool</div></div>
+          <div class="skill-block"><div class="label">Grafik</div><div class="val">Adobe Creative Cloud, Affinity Suite</div></div>
+          <div class="skill-block"><div class="label">Office</div><div class="val">Microsoft Office</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h2>05 — Sprachen</h2>
+      <div class="cv-block-body">
+        <div class="langs">
+          <div class="lang-row"><span>Deutsch</span><span class="lvl">muttersprachlich</span><span class="bar" style="--p:100%"></span></div>
+          <div class="lang-row"><span>Kroatisch</span><span class="lvl">fast muttersprachlich</span><span class="bar" style="--p:92%"></span></div>
+          <div class="lang-row"><span>Englisch</span><span class="lvl">C1</span><span class="bar" style="--p:75%"></span></div>
+          <div class="lang-row"><span>Spanisch</span><span class="lvl">B1</span><span class="bar" style="--p:55%"></span></div>
+          <div class="lang-row"><span>Französisch</span><span class="lvl">B1</span><span class="bar" style="--p:55%"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-block">
+      <h2>06 — Kontakt</h2>
+      <div class="cv-block-body">
+        <div class="contact-block">
+          <a href="mailto:paraminskiana@gmail.com">paraminskiana@gmail.com</a>
+          <a href="tel:+4917680669800">+49 176 80669800</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <span>© 2026 A. Paraminski</span>
+  <span>Coburg / Fürth — Architektur</span>
+</footer>
+
+<!-- Project templates -->
+<template id="proj-glaspalast">
+  <div class="exp-titleblock">
+    <span>Sheet A.001 / Studienarbeit / 2024 / Erlangen</span>
+    <button class="close-btn" data-close>Schließen</button>
+  </div>
+  <div class="exp-hero">
+    <h2>Glaspalast<br />Erlangen.</h2>
+    <dl class="spec-table">
+      <div><dt>Jahr</dt><dd>2024</dd></div>
+      <div><dt>Ort</dt><dd>Erlangen, DE</dd></div>
+      <div><dt>Programm</dt><dd>Studienarbeit, HS Coburg</dd></div>
+      <div><dt>Typologie</dt><dd>Bestand &amp; Erweiterung</dd></div>
+      <div><dt>Maßstab</dt><dd>1:200 / 1:50</dd></div>
+      <div><dt>Status</dt><dd>Abgeschlossen</dd></div>
+    </dl>
+  </div>
+  <image-slot id="v3x-glas-cover" class="exp-cover" shape="rect" placeholder="A.001 — Hauptperspektive"></image-slot>
+  <div class="exp-text">
+    <span class="label">Konzept</span>
+    <div>
+      <p>Eine Auseinandersetzung mit dem Glaspalast Erlangen — der Versuch, das industrielle Bestandsgefüge mit einer zeitgemäßen Nutzung zu verweben. Konstruktion bleibt sichtbar; das Glas wird zur Membran zwischen Innen und Stadtraum.</p>
+      <p><em>Platzhaltertext — Anna ergänzt hier den finalen Beschrieb.</em></p>
+    </div>
+  </div>
+  <div class="exp-plates">
+    <h3>Plates · A.001.01 — A.001.05</h3>
+    <div class="plate-grid">
+      <div class="plate">
+        <image-slot id="v3x-glas-1" class="plate-img" shape="rect" placeholder="Außenperspektive"></image-slot>
+        <div class="plate-cap"><span>Außenperspektive Süd</span><span class="pn">A.001.01</span></div>
+      </div>
+      <div class="plate">
+        <image-slot id="v3x-glas-2" class="plate-img" shape="rect" placeholder="Modell"></image-slot>
+        <div class="plate-cap"><span>Arbeitsmodell</span><span class="pn">A.001.02</span></div>
+      </div>
+      <div class="plate">
+        <image-slot id="v3x-glas-3" class="plate-img" shape="rect" placeholder="Lageplan"></image-slot>
+        <div class="plate-cap"><span>Lageplan</span><span class="pn">A.001.03</span></div>
+      </div>
+      <div class="plate">
+        <image-slot id="v3x-glas-4" class="plate-img" shape="rect" placeholder="Schnitt"></image-slot>
+        <div class="plate-cap"><span>Längsschnitt</span><span class="pn">A.001.04</span></div>
+      </div>
+      <div class="plate">
+        <image-slot id="v3x-glas-5" class="plate-img" shape="rect" placeholder="Innenraum"></image-slot>
+        <div class="plate-cap"><span>Innenraum</span><span class="pn">A.001.05</span></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="proj-kloster">
+  <div class="exp-titleblock">
+    <span>Sheet A.002 / Entwurf / 2025 / Mönchröden</span>
+    <button class="close-btn" data-close>Schließen</button>
+  </div>
+  <div class="exp-hero">
+    <h2>Kloster<br />Mönchröden.</h2>
+    <dl class="spec-table">
+      <div><dt>Jahr</dt><dd>2025</dd></div>
+      <div><dt>Ort</dt><dd>Mönchröden, DE</dd></div>
+      <div><dt>Programm</dt><dd>Entwurf, HS Coburg</dd></div>
+      <div><dt>Typologie</dt><dd>Denkmal &amp; Umnutzung</dd></div>
+      <div><dt>Maßstab</dt><dd>1:200 / 1:50</dd></div>
+      <div><dt>Status</dt><dd>Abgeschlossen</dd></div>
+    </dl>
+  </div>
+  <image-slot id="v3x-kloster-cover" class="exp-cover" shape="rect" placeholder="A.002 — Hauptperspektive"></image-slot>
+  <div class="exp-text">
+    <span class="label">Konzept</span>
+    <div>
+      <p>Eine behutsame Umnutzung des ehemaligen Klosters Mönchröden — der historische Bestand wird zum Träger neuer Nutzungen. Eingriffe sind minimal, aber präzise.</p>
+      <p><em>Platzhaltertext — Anna ergänzt hier den finalen Beschrieb.</em></p>
+    </div>
+  </div>
+  <div class="exp-plates">
+    <h3>Plates · A.002.01 — A.002.05</h3>
+    <div class="plate-grid">
+      <div class="plate"><image-slot id="v3x-kloster-1" class="plate-img" shape="rect" placeholder="Außenperspektive"></image-slot><div class="plate-cap"><span>Außenperspektive</span><span class="pn">A.002.01</span></div></div>
+      <div class="plate"><image-slot id="v3x-kloster-2" class="plate-img" shape="rect" placeholder="Modell"></image-slot><div class="plate-cap"><span>Modell</span><span class="pn">A.002.02</span></div></div>
+      <div class="plate"><image-slot id="v3x-kloster-3" class="plate-img" shape="rect" placeholder="Lageplan"></image-slot><div class="plate-cap"><span>Lageplan</span><span class="pn">A.002.03</span></div></div>
+      <div class="plate"><image-slot id="v3x-kloster-4" class="plate-img" shape="rect" placeholder="Schnitt"></image-slot><div class="plate-cap"><span>Schnitt</span><span class="pn">A.002.04</span></div></div>
+      <div class="plate"><image-slot id="v3x-kloster-5" class="plate-img" shape="rect" placeholder="Innenraum"></image-slot><div class="plate-cap"><span>Innenraum</span><span class="pn">A.002.05</span></div></div>
+    </div>
+  </div>
+</template>
+
+<template id="proj-bachelor">
+  <div class="exp-titleblock">
+    <span>Sheet A.003 / Bachelor Thesis / 2026 / In Arbeit</span>
+    <button class="close-btn" data-close>Schließen</button>
+  </div>
+  <div class="exp-hero">
+    <h2>Bachelor<wbr />arbeit.</h2>
+    <dl class="spec-table">
+      <div><dt>Jahr</dt><dd>2026</dd></div>
+      <div><dt>Status</dt><dd>In Arbeit</dd></div>
+      <div><dt>Programm</dt><dd>Bachelor Thesis, HS Coburg</dd></div>
+      <div><dt>Abgabe</dt><dd>Jul 2026</dd></div>
+      <div><dt>Maßstab</dt><dd>—</dd></div>
+      <div><dt>Betreuung</dt><dd>—</dd></div>
+    </dl>
+  </div>
+  <image-slot id="v3x-bachelor-cover" class="exp-cover" shape="rect" placeholder="A.003 — Bilder folgen"></image-slot>
+  <div class="exp-text">
+    <span class="label">In Arbeit</span>
+    <div>
+      <p>Die Bachelorarbeit entsteht im Sommersemester 2026. Erste Skizzen, Recherchen und Modelle werden im Laufe der Bearbeitung hier ergänzt.</p>
+      <p><em>Diese Seite wächst mit dem Projekt — Bilder und Beschreibung kommen demnächst.</em></p>
+    </div>
+  </div>
+  <div class="exp-plates">
+    <h3>Folgt · A.003.??</h3>
+    <div class="plate-grid">
+      <div class="plate"><image-slot id="v3x-bach-1" class="plate-img" shape="rect" placeholder="Folgt"></image-slot><div class="plate-cap"><span>Folgt</span><span class="pn">A.003.??</span></div></div>
+      <div class="plate"><image-slot id="v3x-bach-2" class="plate-img" shape="rect" placeholder="Folgt"></image-slot><div class="plate-cap"><span>Folgt</span><span class="pn">A.003.??</span></div></div>
+      <div class="plate"><image-slot id="v3x-bach-3" class="plate-img" shape="rect" placeholder="Folgt"></image-slot><div class="plate-cap"><span>Folgt</span><span class="pn">A.003.??</span></div></div>
+    </div>
+  </div>
+</template>
+
+<script>
+const routes = ['projekte', 'ueber'];
+function setRoute(name) {
+  if (!routes.includes(name)) name = 'projekte';
+  for (const r of routes) document.getElementById('page-' + r).classList.toggle('active', r === name);
+  document.querySelectorAll('nav.primary a, .brand').forEach(a => {
+    if (a.dataset.route) a.classList.toggle('active', a.dataset.route === name);
+  });
+  if (location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', () => setRoute(location.hash.slice(1)));
+setRoute(location.hash.slice(1) || 'projekte');
+
+const list = document.getElementById('draftList');
+let openExpander = null;
+
+function expandFromRow(row, projectId) {
+  if (openExpander) return;
+  const tpl = document.getElementById('proj-' + projectId);
+  if (!tpl) return;
+  const rect = row.getBoundingClientRect();
+  const exp = document.createElement('div');
+  exp.className = 'expander';
+  exp.style.top = rect.top + 'px';
+  exp.style.left = rect.left + 'px';
+  exp.style.width = rect.width + 'px';
+  exp.style.height = rect.height + 'px';
+  const inner = document.createElement('div');
+  inner.className = 'expander-inner';
+  inner.appendChild(tpl.content.cloneNode(true));
+  exp.appendChild(inner);
+  document.body.appendChild(exp);
+  requestAnimationFrame(() => {
+    exp.classList.add('opening');
+    requestAnimationFrame(() => exp.classList.add('open'));
+  });
+  document.body.style.overflow = 'hidden';
+  openExpander = { exp, row };
+  inner.querySelector('[data-close]')?.addEventListener('click', () => collapse());
+}
+
+function collapse() {
+  if (!openExpander) return;
+  const { exp, row } = openExpander;
+  const rect = row.getBoundingClientRect();
+  exp.classList.remove('open');
+  exp.classList.add('closing');
+  exp.style.top = rect.top + 'px';
+  exp.style.left = rect.left + 'px';
+  exp.style.width = rect.width + 'px';
+  exp.style.height = rect.height + 'px';
+  document.body.style.overflow = '';
+  setTimeout(() => exp.remove(), 700);
+  openExpander = null;
+}
+
+list.addEventListener('click', (e) => {
+  const row = e.target.closest('.draft-row');
+  if (!row) return;
+  expandFromRow(row, row.dataset.project);
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && openExpander) collapse(); });
+</script>
+
+</body>
+</html>

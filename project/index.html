@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Anna's Portfolio — Three Directions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+@font-face {
+  font-family: 'Alte Haas Grotesk';
+  src: url('fonts/AlteHaasGroteskRegular.ttf') format('truetype');
+  font-display: swap;
+}
+html, body { margin: 0; padding: 0; font-family: 'Alte Haas Grotesk', Helvetica, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+
+<script type="text/babel">
+function Frame({ src }) {
+  return (
+    <iframe
+      src={src}
+      style={{ width: '100%', height: '100%', border: '0', display: 'block', background: '#fff' }}
+    />
+  );
+}
+
+function App() {
+  return (
+    <DesignCanvas>
+      <DCSection id="projekte" title="Projekte — drei Richtungen" subtitle="Landing-Seite. Klick auf ein Projekt → expandiert in alle Richtungen.">
+        <DCArtboard id="v1-projekte" label="01 · Editorial Index" width={1280} height={1600}>
+          <Frame src="variations/v1-editorial.html" />
+        </DCArtboard>
+        <DCArtboard id="v2-projekte" label="02 · Image Spreads" width={1280} height={1600}>
+          <Frame src="variations/v2-spread.html" />
+        </DCArtboard>
+        <DCArtboard id="v3-projekte" label="03 · Architectural Plan" width={1280} height={1600}>
+          <Frame src="variations/v3-plan.html" />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="ueber" title="Über uns — drei Richtungen" subtitle="CV-Seite, gleiche drei Konzepte.">
+        <DCArtboard id="v1-cv" label="01 · Editorial CV" width={1280} height={1600}>
+          <Frame src="variations/v1-editorial.html#ueber" />
+        </DCArtboard>
+        <DCArtboard id="v2-cv" label="02 · Image-led CV" width={1280} height={1600}>
+          <Frame src="variations/v2-spread.html#ueber" />
+        </DCArtboard>
+        <DCArtboard id="v3-cv" label="03 · Plan CV" width={1280} height={1600}>
+          <Frame src="variations/v3-plan.html#ueber" />
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>

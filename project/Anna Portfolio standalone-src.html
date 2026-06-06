@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<title>Ana Paraminski — Architektur</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- pennant images referenced as JS string literals — lifted for standalone bundling -->
+<meta name="ext-resource-dependency" content="assets/img/glaspalast-1.jpg" data-resource-id="penGlas1" />
+<meta name="ext-resource-dependency" content="assets/img/glaspalast-2.jpg" data-resource-id="penGlas2" />
+<meta name="ext-resource-dependency" content="assets/img/glaspalast-3.jpg" data-resource-id="penGlas3" />
+<meta name="ext-resource-dependency" content="assets/img/kloster-modell.jpg" data-resource-id="penKloster1" />
+<meta name="ext-resource-dependency" content="assets/img/kloster-innen.jpg" data-resource-id="penKloster2" />
+<meta name="ext-resource-dependency" content="assets/img/kloster-skizze.jpg" data-resource-id="penKloster3" />
+<meta name="ext-resource-dependency" content="assets/img/b/model-site1.jpg" data-resource-id="penBach1" />
+<meta name="ext-resource-dependency" content="assets/img/b/collage.jpg" data-resource-id="penBach2" />
+<meta name="ext-resource-dependency" content="assets/img/b/model-hall.jpg" data-resource-id="penBach3" />
+<link rel="stylesheet" href="assets/site.css" />
+<script src="assets/image-slot.js"></script>
+<script src="assets/pennants.js"></script>
+</head>
+<body>
+
+<header class="site" id="header">
+  <a class="brand" href="#start" data-route="start" aria-label="Zur Startseite">
+    <span>Ana<span class="dot"></span></span><span class="last">Paraminski</span>
+  </a>
+  <nav class="primary">
+    <a href="#start" data-route="start" class="active">Projekte</a>
+    <a href="#baustelle" data-route="baustelle">Baustelle</a>
+    <a href="#ueber" data-route="ueber">Über mich</a>
+    <a href="#kontakt" data-route="kontakt" class="kontakt">Kontakt</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============ START / PROJEKTE ============ -->
+<section class="page active" id="page-start" data-screen-label="Start — Wimpelketten">
+
+  <div class="hero" id="hero">
+    <div class="pennant-stage" id="stage">
+      <svg class="cords" id="cords" preserveAspectRatio="none"></svg>
+    </div>
+
+    <div class="hover-title" id="hoverTitle">
+      <div class="ht-inner">
+        <div class="ht-kicker" id="htKicker">Projekt 01</div>
+        <h2 id="htName">Glaspalast Erlangen</h2>
+        <div class="ht-meta" id="htMeta">2024 · Erlangen</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Project index below the fold -->
+  <div class="index">
+    <div class="index-head">
+      <span class="t">Werkverzeichnis</span>
+      <span class="n">2025 — 2026</span>
+    </div>
+    <div id="projList">
+      <div class="proj-row" data-project="glaspalast">
+        <span class="rn">01 / 03</span>
+        <span class="rt">Glaspalast Erlangen</span>
+        <span class="rm">Quartiersentwicklung</span>
+        <span class="rm">2025/26 · Erlangen</span>
+        <span class="rk">+</span>
+      </div>
+      <div class="proj-row" data-project="kloster">
+        <span class="rn">02 / 03</span>
+        <span class="rt">Kloster Mönchröden</span>
+        <span class="rm">Umnutzung Denkmal</span>
+        <span class="rm">2025/26 · Mönchröden</span>
+        <span class="rk">+</span>
+      </div>
+      <div class="proj-row" data-project="bachelor">
+        <span class="rn">03 / 03</span>
+        <span class="rt">Bachelorarbeit</span>
+        <span class="rm">Transformation</span>
+        <span class="rm">2026 · Coburg</span>
+        <span class="rk">+</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ÜBER MICH ============ -->
+<section class="page" id="page-ueber" data-screen-label="Über mich — CV">
+  <div class="cv">
+    <div class="cv-head">
+      <div>
+        <p class="eyebrow">Über mich</p>
+        <h1>Ana<span class="o">.</span><br />Paraminski.</h1>
+      </div>
+      <div>
+        <image-slot id="cv-portrait" class="cv-portrait" shape="rect" placeholder="Portrait"></image-slot>
+        <div class="profil">
+          <p>Ich bin Ana — und wäre gerne bei Ihnen Praktikantin<span class="o">.</span></p>
+          <p>Am liebsten bearbeite ich Projekte im Bestand — sei es auf Quartiersebene oder im konstruktiven Detail. Mir macht es Spaß, mich auf bestehende Strukturen einzulassen und sie weiterzudenken; dabei ist mir der soziale und städtebauliche Kontext besonders wichtig.</p>
+          <p>Ich arbeite mit viel Eigeninitiative im Team und übernehme gerne Verantwortung — ebenso gewohnt bin ich es, Aufgaben selbstständig zu strukturieren. Das Praktikum sehe ich als Chance, vielfältige Einblicke in die Planungs- und Ausführungsphasen zu gewinnen und aktiv beizutragen. Ab Sommer 2026 bin ich frei.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-row">
+      <h2>Ausbildung</h2>
+      <div class="cv-list">
+        <div class="cv-item"><span class="when">Okt 2022 — Jul 2026</span><span class="what">Architektur, B.A.<span class="role">Hochschule Coburg</span></span></div>
+        <div class="cv-item"><span class="when">2014 — 2022</span><span class="what">Abitur<span class="role">Helene-Lange-Gymnasium Fürth</span></span></div>
+      </div>
+    </div>
+
+    <div class="cv-row">
+      <h2>Berufs­erfahrung</h2>
+      <div class="cv-list">
+        <div class="cv-item"><span class="when">Apr 2025 — Aug 2026</span><span class="what">Stud. Hilfskraft, International Office<span class="role">Hochschule Coburg — Eventplanung &amp; -durchführung, interkulturelle Kompetenzen</span></span></div>
+        <div class="cv-item"><span class="when">Okt 2024 — Mär 2025</span><span class="what">Praktikum<span class="role">HOLODECK architects ZT GmbH, Wien — Architekturwettbewerbe, Ausstellungsplanung &amp; -gestaltung</span></span></div>
+        <div class="cv-item"><span class="when">Feb 2024 — Mär 2024</span><span class="what">Baustellenpraktikum<span class="role">Holzbau Wunner, Emskirchen — Zimmererarbeiten, Denkmalsanierung</span></span></div>
+        <div class="cv-item"><span class="when">Aug 2023 — Sep 2023</span><span class="what">Baustellenpraktikum<span class="role">GS Schenk, Fürth — hoch- und tiefbauliche Arbeiten (viel Beton)</span></span></div>
+      </div>
+    </div>
+
+    <div class="cv-row">
+      <h2>Aus­­zeichnungen &amp; Engagement</h2>
+      <div class="cv-list">
+        <div class="cv-item"><span class="when">seit Mai 2025</span><span class="what">Kollektiv Abriss Wieso?<span class="role">Mitglied — <a href="https://instagram.com/abriss.wieso" target="_blank" rel="noopener">@abriss.wieso</a></span></span></div>
+        <div class="cv-item"><span class="when">Apr 2024 — Sep 2026</span><span class="what">Deutschlandstipendium<span class="role">Stipendiatin</span></span></div>
+        <div class="cv-item"><span class="when">Aug 2023 — Jul 2024</span><span class="what">Dienstagsreihe Coburg<span class="role">Organisationsleitung — <a href="https://www.dienstagsreihe-coburg.de" target="_blank" rel="noopener">dienstagsreihe-coburg.de</a></span></span></div>
+      </div>
+    </div>
+
+    <div class="cv-row">
+      <h2>Kenntnisse</h2>
+      <div class="skills-grid">
+        <div class="skill-block"><div class="label">CAD</div><div class="val">ArchiCAD, AutoCAD</div></div>
+        <div class="skill-block"><div class="label">BIM</div><div class="val">BIMmTool</div></div>
+        <div class="skill-block"><div class="label">Grafik</div><div class="val">Adobe Creative Cloud, Affinity Suite</div></div>
+        <div class="skill-block"><div class="label">Office</div><div class="val">Microsoft Office</div></div>
+      </div>
+    </div>
+
+    <div class="cv-row">
+      <h2>Sprachen</h2>
+      <div class="langs">
+        <div class="lang-row"><span>Deutsch</span><span class="lvl">MUTTERSPRACH
+LICH</span><span class="bar" style="--p:100%"></span></div>
+        <div class="lang-row"><span>Kroatisch</span><span class="lvl">FAST MUTTERSPRACH
+LICH</span><span class="bar" style="--p:92%"></span></div>
+        <div class="lang-row"><span>Englisch</span><span class="lvl">C1</span><span class="bar" style="--p:78%"></span></div>
+        <div class="lang-row"><span>Spanisch</span><span class="lvl">B1</span><span class="bar" style="--p:55%"></span></div>
+        <div class="lang-row"><span>Französisch</span><span class="lvl">B1</span><span class="bar" style="--p:55%"></span></div>
+      </div>
+    </div>
+
+    <div class="bs-eindruck-head">
+      <h2>Bei der Planung</h2>
+      <p>Wettbewerbe, Ausstellungen und Veranstaltungen — vom Büro bis zur Bühne.</p>
+    </div>
+    <div class="bs-gallery">
+      <figure class="wide" style="grid-column:1/8">
+        <img src="assets/img/planung/holodeck-raum.jpg" alt="Studio von HOLODECK architects, Wien" loading="lazy" />
+        <figcaption>Praktikum bei HOLODECK architects, Wien</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:8/13">
+        <img src="assets/img/planung/diwali-plakat.jpg" alt="Plakat Diwali for everyone" loading="lazy" />
+        <figcaption>Diwali for everyone — Eventgestaltung, International Office</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:1/5;margin-top:34px">
+        <img src="assets/img/planung/pinnwand.jpg" alt="Pinnwand mit Plakaten und Material" loading="lazy" />
+        <figcaption>Recherche &amp; Materialsammlung</figcaption>
+      </figure>
+      <figure class="med" style="grid-column:5/13">
+        <img src="assets/img/planung/holodeck-regal.jpg" alt="Ausstellungsregal bei HOLODECK" loading="lazy" />
+        <figcaption>Ausstellungsgestaltung — Modelle &amp; Pläne im Regal</figcaption>
+      </figure>
+      <figure class="med" style="grid-column:1/7">
+        <img src="assets/img/planung/diwali-gruppe.jpg" alt="Gruppe beim Diwali-Fest" loading="lazy" />
+        <figcaption>Diwali-Fest — Eventdurchführung in Coburg</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:7/13;margin-top:-6px">
+        <img src="assets/img/planung/diwali-party.jpg" alt="Tanzfläche beim Diwali-Fest" loading="lazy" />
+        <figcaption>Festival of Light — bis 22 Uhr</figcaption>
+      </figure>
+    </div>
+
+    <div class="bs-eindruck-head">
+      <h2>Studio &amp; Kollektiv</h2>
+      <p>Zwischen Hörsaal, Werkstatt und Abriss.Wieso? — wo Architektur gemeinsam entsteht.</p>
+    </div>
+    <div class="bs-gallery">
+      <figure class="wide" style="grid-column:1/8">
+        <img src="assets/img/team/gruppe.jpg" alt="Der Jahrgang vor der Porträtwand" loading="lazy" />
+        <figcaption>Der Jahrgang — Architektur an der HS Coburg</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:8/13">
+        <img src="assets/img/team/aquaria-presentation.jpg" alt="Präsentation Transformation des Aquaria" loading="lazy" />
+        <figcaption>Bachelorpräsentation — Transformation des Aquaria</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:1/4;margin-top:34px">
+        <img src="assets/img/team/abriss-plaene.jpg" alt="Pläne von Abriss.Wieso?" loading="lazy" />
+        <figcaption>Abriss.Wieso? — Recherche &amp; Pläne</figcaption>
+      </figure>
+      <figure class="med" style="grid-column:4/9">
+        <img src="assets/img/team/abriss-ausstellung.jpg" alt="Ausstellung Abriss Wieso?" loading="lazy" />
+        <figcaption>Ausstellung „Abriss Wieso?" — Gemeinsam für Erhalt</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:9/13;margin-top:34px">
+        <img src="assets/img/team/studio-logo.jpg" alt="Studio-Logo, handgemalt" loading="lazy" />
+        <figcaption>Studio</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:1/5">
+        <img src="assets/img/team/arbeitsplatz.jpg" alt="Arbeitsplatz im Studio" loading="lazy" />
+        <figcaption>Der eigene Arbeitsplatz</figcaption>
+      </figure>
+      <figure class="wide" style="grid-column:5/13;margin-top:30px">
+        <img src="assets/img/team/hoersaal.jpg" alt="Vortrag im Hörsaal" loading="lazy" />
+        <figcaption>Werkschau im Hörsaal</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:1/5">
+        <img src="assets/img/team/werkstatt.jpg" alt="Werkstatt-Regal mit Werkzeug" loading="lazy" />
+        <figcaption>Modellbau-Werkstatt</figcaption>
+      </figure>
+      <figure class="med" style="grid-column:5/13;margin-top:-6px">
+        <img src="assets/img/team/studio-rad.jpg" alt="Studio mit Rennrad und Pflanze" loading="lazy" />
+        <figcaption>Studioalltag</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<section class="page" id="page-baustelle" data-screen-label="Baustelle — Was mich bewegt">
+  <div class="cv">
+    <div class="cv-head">
+      <div>
+        <p class="eyebrow">Was mich bewegt</p>
+        <h1>Bau<wbr />stelle<span class="o">.</span></h1>
+      </div>
+      <div>
+        <img class="cv-portrait" src="assets/img/bs/portrait.jpg" alt="Ana auf der Baustelle" loading="lazy" />
+        <div class="profil">
+          <p>Architektur passiert nicht nur am Zeichentisch<span class="o">.</span></p>
+          <p>Drei Felder treiben mich an: das Gestalten von Ausstellungen und Veranstaltungen, das praktische Arbeiten auf der Baustelle und das selbstorganisierte Wirken im Team.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-row">
+      <h2>Bei der Planung</h2>
+      <div class="cv-list">
+        <div class="cv-item"><span class="when">März 2025</span><span class="what">Ausstellungsplanung &amp; -gestaltung<span class="role">HOLODECK architects, Wien</span></span></div>
+        <div class="cv-item"><span class="when">seit Apr 2025</span><span class="what">Veranstaltungsplanung &amp; -durchführung<span class="role">International Office, HS Coburg</span></span></div>
+      </div>
+    </div>
+
+    <div class="cv-row">
+      <h2>Auf der Baustelle</h2>
+      <div class="cv-list">
+        <div class="cv-item"><span class="when">Aug 2025</span><span class="what">Summer School Sri Lanka<span class="role">Bau einer Ganztagesschule</span></span></div>
+        <div class="cv-item"><span class="when">Apr 2025</span><span class="what">Mehrtägiger Lehmbau-Workshop<span class="role">BauLab der HS Coburg</span></span></div>
+        <div class="cv-item"><span class="when">März 2024</span><span class="what">Sanierung Volksbad Nürnberg<span class="role">Denkmal — Holzbau Wunner, Emskirchen</span></span></div>
+        <div class="cv-item"><span class="when">Aug 2023</span><span class="what">Erweiterung einer Lackiererei<span class="role">GS Schenk, Fürth</span></span></div>
+      </div>
+    </div>
+
+    <div class="cv-row">
+      <h2>Im Team</h2>
+      <div class="cv-list">
+        <div class="cv-item"><span class="when">seit Mai 2025</span><span class="what">Kollektiv Abriss.Wieso?<span class="role">Kollektivarbeit — <a href="https://instagram.com/abriss.wieso" target="_blank" rel="noopener">@abriss.wieso</a></span></span></div>
+        <div class="cv-item"><span class="when">laufend</span><span class="what">Selbstverwalteter Arbeitsraum<span class="role">(Innen-)Architekturstudierende im innerstädtischen Leerstand</span></span></div>
+        <div class="cv-item"><span class="when">2023 — 2024</span><span class="what">Dienstagsreihe Coburg<span class="role">Organisationsleitung</span></span></div>
+      </div>
+    </div>
+
+    <div class="bs-eindruck-head">
+      <h2>Eindrücke</h2>
+      <p>Sri Lanka, BauLab, Volksbad &amp; Co. — Bauen mit den Händen.</p>
+    </div>
+    <div class="bs-gallery">
+      <figure class="wide" style="grid-column:1/8">
+        <img src="assets/img/bs/srilanka-team.jpg" alt="Summer School Sri Lanka — Team" loading="lazy" />
+        <figcaption>Summer School Sri Lanka — Bau einer Ganztagesschule</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:8/13">
+        <img src="assets/img/bs/srilanka-detail.jpg" alt="Holz-Ziegel-Detail" loading="lazy" />
+        <figcaption>Holz trifft Ziegel — Konstruktionsdetail</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:1/4;margin-top:32px">
+        <img src="assets/img/bs/wheelbarrow.jpg" alt="Auf der Baustelle" loading="lazy" />
+        <figcaption>Erweiterung Lackiererei, Fürth</figcaption>
+      </figure>
+      <figure class="wide" style="grid-column:4/10">
+        <img src="assets/img/bs/baulab.jpg" alt="BauLab Lehmbau-Workshop" loading="lazy" />
+        <figcaption>Lehmbau-Workshop, BauLab der HS Coburg</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:10/13;margin-top:32px">
+        <img src="assets/img/bs/tools.jpg" alt="Werkzeug" loading="lazy" />
+        <figcaption>Feierabend</figcaption>
+      </figure>
+      <figure class="tall" style="grid-column:1/4">
+        <img src="assets/img/bs/plank.jpg" alt="Bauen mit Ziegeln" loading="lazy" />
+        <figcaption>Ziegel um Ziegel</figcaption>
+      </figure>
+      <figure class="med" style="grid-column:4/9;margin-top:28px">
+        <img src="assets/img/bs/tiles.jpg" alt="Sanierung Volksbad Nürnberg" loading="lazy" />
+        <figcaption>Sanierung Volksbad Nürnberg — Denkmal</figcaption>
+      </figure>
+      <figure class="sq" style="grid-column:9/13">
+        <img src="assets/img/bs/scorpion.jpg" alt="Skorpion auf der Baustelle in Sri Lanka" loading="lazy" />
+        <figcaption>Unerwarteter Besuch, Sri Lanka</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT ============ -->
+<section class="page" id="page-kontakt" data-screen-label="Kontakt">
+  <div class="kontakt">
+    <div class="kontakt-inner">
+      <p class="eyebrow">Kontakt</p>
+      <h1>Lass uns<br />bauen<span class="o">.</span></h1>
+      <div class="kontakt-grid">
+        <div class="col">
+          <div class="label">E-Mail</div>
+          <a href="mailto:paraminskiana@gmail.com">paraminskiana@gmail.com</a>
+        </div>
+        <div class="col">
+          <div class="label">Telefon</div>
+          <a href="tel:+4917680669800">+49 176 80669800</a>
+        </div>
+        <div class="col">
+          <div class="label">Standort</div>
+          <p>Coburg / Fürth<br />Deutschland</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <span>© 2026 Ana Paraminski</span>
+  <span>Architektur<span class="o">.</span> Coburg / Fürth</span>
+</footer>
+
+<!-- ============ PROJECT DETAIL TEMPLATES ============ -->
+<template id="proj-glaspalast">
+  <div class="exp-head">
+    <span class="crumb">01 / 03 — Glaspalast Erlangen</span>
+    <button class="close-btn" data-close><span>Schließen</span><span class="x"></span></button>
+  </div>
+
+  <div class="ged">
+
+    <!-- Title -->
+    <div class="ged-row ged-title">
+      <figure class="ged-fig hand">
+        <img src="assets/img/g/header.jpg" alt="Glaspalast Erlangen" loading="lazy" style="object-fit: cover; width: 400px" />
+      </figure>
+      <div class="meta">
+        <p class="kick">Projekt 01 / 03</p>
+        <dl>
+          <div><dt>Semester</dt><dd>WiSe 2025/26</dd></div>
+          <div><dt>Ort</dt><dd>Erlangen, DE</dd></div>
+          <div><dt>Modul</dt><dd>Entwurfsstudio, HS Coburg</dd></div>
+          <div><dt>Betreuung</dt><dd>Prof. Bonhag-De Rosa · Dr. Vojnović Ćalić</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Concept + figure-ground -->
+    <div class="ged-row">
+      <div class="ged-text c1-5">
+        <p class="kick">Konzept</p>
+        <p>Quartiersentwicklung im Bürobestand rund um den „roten Platz“ — dem ehemals von Siemens genutzten Areal südöstlich der Erlanger Innenstadt. Die charakteristischen Gebäude stehen seit Jahren leer.</p>
+        <p>Noch vor der eigentlichen Entwicklung wird die bevorstehende Veränderung durch eine öffentliche Intervention sichtbar gemacht: ein beleuchteter Pavillon als Ort für partizipative Prozesse, dazu flexible Möblierung aus Abbruchmaterial der Glaspalast-Innenräume. Städtebaulich bleibt der Bestand nahezu vollständig erhalten.</p>
+        <div class="steps">
+          <span class="step-chip"><span class="sn">01</span> Erster Impuls</span>
+          <span class="step-chip"><span class="sn">02</span> Aktivierung der Nachbarschaft</span>
+          <span class="step-chip"><span class="sn">03</span> Teilentwurf Schulgebäude</span>
+        </div>
+      </div>
+      <figure class="ged-fig c7-12">
+        <img src="assets/img/g/lageplan.jpg" alt="Schwarzplan" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 01</span><span><b>Schwarzplan</b> Lage im Stadtgefüge — das Areal südöstlich der Innenstadt.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Big aerial render -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-12">
+        <img src="assets/img/g/aerial.jpg" alt="Axonometrie des Quartiers" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 02</span><span><b>Quartier im Bestand</b> Sportgarten, Markthalle, Schule, gemischtes Wohnen und Tanzbar — verwoben zu einem durchmischten Stück Stadt.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Program axon + caption -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-7">
+        <img src="assets/img/g/programm.jpg" alt="Nutzungskonzept" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 03</span><span><b>Nutzungskonzept</b> Wege, Verweilorte und Programm der einzelnen Häuser.</span></figcaption>
+      </figure>
+      <div class="ged-text c8-12 offset-lg">
+        <p class="kick">Programm</p>
+        <p>Faires Wohnen und gute Nachbarschaft, Zugang zu Betreuung und Bildung, soziale Teilhabe und kurze Wege — getragen von einem Netz aus Schule, Markthalle, Sportgarten und Quartiersbüro.</p>
+      </div>
+    </div>
+
+    <!-- Long section, full width -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-12">
+        <img src="assets/img/g/schnitt.jpg" alt="Längsschnitt" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 04</span><span><b>Längsschnitt</b> Grüne Fuge, Markthalle und urbane Fuge entlang der Werner-von-Siemens-Straße.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Two site plans -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-6">
+        <img src="assets/img/g/plan-quartier.jpg" alt="Lageplan Quartier" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 05</span><span><b>Lageplan</b> Obergeschoss mit Dachgärten und Sportflächen.</span></figcaption>
+      </figure>
+      <figure class="ged-fig c7-12 offset-lg">
+        <img src="assets/img/g/plan-eg.jpg" alt="Erdgeschossplan" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 06</span><span><b>Erdgeschoss</b> Markthalle, Quartiersbüro, Schule und öffentliches Erdgeschoss.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Cluster plans + hand sketches -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-7">
+        <img src="assets/img/g/plan-cluster.jpg" alt="Grundrisse Schule" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 07</span><span><b>Schule</b> Cluster-Grundrisse mit Bibliothek und Lernterrassen.</span></figcaption>
+      </figure>
+      <figure class="ged-fig c8-12 offset-md">
+        <img src="assets/img/g/skizzen.jpg" alt="Skizzen der Geschosse" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 08</span><span><b>Skizzen</b> Organisation der Geschosse — von der Mensa bis zur Musik.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Elevation -->
+    <div class="ged-row">
+      <figure class="ged-fig c2-12">
+        <img src="assets/img/g/ansicht.jpg" alt="Ansicht Schulgebäude" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 09</span><span><b>Ansicht</b> Das Schulhaus mit textilem Sonnenschutz und gläserner Mittelfuge.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Section sketch + façade detail -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-7">
+        <img src="assets/img/g/schnitt-skizze.jpg" alt="Schnittperspektive" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 10</span><span><b>Schnittperspektive</b> Das neue Atrium verbindet die Geschosse.</span></figcaption>
+      </figure>
+      <figure class="ged-fig c9-13 offset-lg">
+        <img src="assets/img/g/fassade.jpg" alt="Fassadendetail Bestand" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 11</span><span><b>Bestand</b> Klinker, Beton und Glas der vorhandenen Bürobauten.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Model photos -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-7">
+        <img src="assets/img/g/modell-innen.jpg" alt="Modell Innenraum" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 12</span><span><b>Modell</b> Wandscheiben gliedern den Innenraum des Schulhauses.</span></figcaption>
+      </figure>
+      <figure class="ged-fig c6-12 offset-lg">
+        <img src="assets/img/g/modell-oben.jpg" alt="Modell Aufsicht" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 13</span><span><b>Aufsicht</b> Möblierung und Wegeführung im Arbeitsmodell.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Closing courtyard photo -->
+    <div class="ged-row">
+      <figure class="ged-fig c3-11">
+        <img src="assets/img/g/hof.jpg" alt="Innenhof des Bestands" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 14</span><span><b>Ort</b> Der heutige Hof des Glaspalast-Areals — Ausgangspunkt des Entwurfs.</span></figcaption>
+      </figure>
+    </div>
+
+  </div>
+
+  <div class="exp-foot"><a href="#" data-close>↑ Zurück zum Index</a><a href="#" data-goto="kloster">Weiter — 02 Kloster Mönchröden →</a></div>
+</template>
+
+<template id="proj-kloster">
+  <div class="exp-head">
+    <span class="crumb">02 / 03 — Kloster Mönchröden</span>
+    <button class="close-btn" data-close><span>Schließen</span><span class="x"></span></button>
+  </div>
+
+  <div class="ged">
+
+    <!-- Title -->
+    <div class="ged-row ged-title">
+      <figure class="ged-fig hand">
+        <img src="assets/img/k/01.jpg" alt="Kloster Mönchröden" loading="lazy" style="width: 400px" />
+      </figure>
+      <div class="meta">
+        <p class="kick">Projekt 02 / 03</p>
+        <dl>
+          <div><dt>Semester</dt><dd>WiSe 2025/26</dd></div>
+          <div><dt>Ort</dt><dd>Mönchröden, DE</dd></div>
+          <div><dt>Modul</dt><dd>Konstruktion + Entwurf II</dd></div>
+          <div><dt>Betreuung</dt><dd>Prof. Roger Karbe</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Concept + cellar photo -->
+    <div class="ged-row">
+      <div class="ged-text c1-5">
+        <p class="kick">Konzept — Umnutzung eines Denkmals</p>
+        <p>Das Refektorium des ehemaligen Klosters in Mönchröden soll zu einem Ort der Gemeinschaft und der Fürsorge werden, ganz im ursprünglichen klösterlichen Sinne. Im historischen Gebäude finden eine Tagespflege, eine altersgerechte Cluster-Wohnung und eine großzügige, flexible Personalwohnung Platz.</p>
+        <p>Daneben bleibt sowohl im Innen- als auch im Außenraum genügend Begegnungsfläche für den Austausch.</p>
+        <div class="steps">
+          <span class="step-chip"><span class="sn">01</span> Grundriss &amp; Schnitt</span>
+          <span class="step-chip"><span class="sn">02</span> Fassade</span>
+          <span class="step-chip"><span class="sn">03</span> Bühnenpavillon</span>
+        </div>
+      </div>
+      <figure class="ged-fig c7-12">
+        <img src="assets/img/k/04.jpg" alt="Gewölbekeller des Bestands" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 01</span><span><b>Bestand</b> Das historische Sandstein- und Ziegelgewölbe im Erdgeschoss.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Chapter 01 -->
+    <div class="ged-row">
+      <div class="ged-chapter"><span class="cn">01</span><h3>Gebäude im Überblick</h3></div>
+      <figure class="ged-fig c1-12">
+        <img src="assets/img/k/05.jpg" alt="Längsschnitt durch das Refektorium" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 02</span><span><b>Längsschnitt</b> Bestand, Dachausbau und neuer Aufzugsschacht im Osten.</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="ged-row">
+      <figure class="ged-fig c1-7">
+        <img src="assets/img/k/02.jpg" alt="Schwarzplan / Lageplan" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 03</span><span><b>Lageplan</b> Refektorium im Verbund mit Kirche, Pfarrhaus und Abtshaus — der Pavillon in der Landschaft.</span></figcaption>
+      </figure>
+      <figure class="ged-fig c8-12 offset-lg">
+        <img src="assets/img/k/07.jpg" alt="Explosionsaxonometrie der Eingriffe" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 04</span><span><b>Eingriffe</b> Ankommen, Barrierefreiheit, Entfluchtung &amp; Belichtung — abgesetzt vom Bestand.</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="ged-row">
+      <figure class="ged-fig c1-5">
+        <img src="assets/img/k/08.jpg" alt="Grundrisse der Geschosse" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 05</span><span><b>Grundrisse</b> Erdgeschoss bis Dachebene mit den neuen Nutzungen.</span></figcaption>
+      </figure>
+      <div class="ged-text c7-12 offset-md">
+        <p class="kick">Substanz</p>
+        <p>Die Substanz wird nur sparsam und behutsam verändert, um den Denkmalwert zu wahren — die massive Außenmauer bleibt bis auf gezielte Durchbrüche unangetastet, der Treppenkern des Umbaus aus den 1980er Jahren wird in den Sanitärkern integriert.</p>
+        <figure class="ged-fig" style="margin-top:28px">
+          <img src="assets/img/k/03.jpg" alt="Konstruktionsmodell" loading="lazy" />
+          <figcaption class="ged-cap"><span class="abb">Abb. 06</span><span><b>Modell</b> Konstruktionsstudie der Dach- und Wandschichten.</span></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- Chapter 02 -->
+    <div class="ged-row">
+      <div class="ged-chapter"><span class="cn">02</span><h3>Fassade</h3></div>
+      <figure class="ged-fig c1-12">
+        <img src="assets/img/k/10.jpg" alt="Visualisierung des Klosters mit Anbau" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 07</span><span><b>Visualisierung</b> Der neue Aufzugsschacht und die Dachterrasse fügen sich in den denkmalgeschützten Kontext.</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="ged-row">
+      <figure class="ged-fig c1-6">
+        <img src="assets/img/k/09.jpg" alt="Fassadenmodell" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 08</span><span><b>Fassadenmodell</b> Schieferdeckung, Streckmetall und Holzkonstruktion im Schichtenaufbau.</span></figcaption>
+      </figure>
+      <div class="ged-text c8-12 offset-lg">
+        <p class="kick">Detail — Aufzugsschacht zu Dachterrasse</p>
+        <p>Das denkmalgeschützte Refektorium wird in seiner Substanz nur sparsam verändert, um den Denkmalwert zu betonen. Im Innern wird die Treppe im Westen zu einer Fluchttreppe ausgebaut; der neue Aufzug schafft Barrierefreiheit bis auf die Dachterrasse.</p>
+      </div>
+    </div>
+
+    <div class="ged-row">
+      <figure class="ged-fig c1-7">
+        <img src="assets/img/k/11.jpg" alt="Detailschnitt Aufzugsschacht" loading="lazy" style="width: 200px" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 09</span><span><b>Detailschnitt</b> Terrassendach und Aufzugswand im Anbau, M 1:5 / 1:50.</span></figcaption>
+      </figure>
+      <figure class="ged-fig c8-12 offset-md">
+        <img src="assets/img/k/12.jpg" alt="Konstruktionsdetails" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 10</span><span><b>Konstruktion</b> Dachanschlüsse, Fenster und Sockel im Bestand.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Chapter 03 -->
+    <div class="ged-row">
+      <div class="ged-chapter"><span class="cn">03</span><h3>Ergänzend — Bühnenpavillon</h3></div>
+      <figure class="ged-fig c1-7">
+        <img src="assets/img/k/15.jpg" alt="Modell des Bühnenpavillons" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 11</span><span><b>Pavillon-Modell</b> Vier Dreigelenkrahmen, kreisförmig angeordnet.</span></figcaption>
+      </figure>
+      <div class="ged-text c8-12 offset-lg">
+        <p class="kick">Heimatspiel</p>
+        <p>In der parkähnlichen Landschaft platziert sich die leichte Pavillon-Konstruktion, die einen niederschwelligen Ort für das Heimatspiel und andere Gemeinschaftsveranstaltungen bietet.</p>
+        <p>Acht Zangenkonstruktionen aus Konstruktionsvollholz bilden vier Dreigelenkrahmen, die kreisförmig angeordnet sind und sich auf zwei verschiedenen Höhen in der Mitte treffen. Dazwischen ist eine wasserundurchlässige Membran windschief gespannt — Schutz vor Witterung und Sonne. Die Aussteifung erfolgt über Druckstäbe und Windverbände.</p>
+      </div>
+    </div>
+
+    <div class="ged-row">
+      <figure class="ged-fig c1-8">
+        <img src="assets/img/k/13.jpg" alt="Grundriss und Schnitt des Pavillons" loading="lazy" style="width: 200px" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 12</span><span><b>Grundriss &amp; Schnitt</b> Tragwerk des Pavillons, M 1:50.</span></figcaption>
+      </figure>
+      <figure class="ged-fig c9-13 offset-lg">
+        <img src="assets/img/k/14.jpg" alt="Detail Firstpunkt" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 13</span><span><b>Detail Firstpunkt</b> Metallschwert, Metallring und rotationsgelagerte Anschlussplatten.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Closing concept sketch -->
+    <div class="ged-row">
+      <figure class="ged-fig c3-11">
+        <img src="assets/img/k/06.jpg" alt="Konzeptskizze" loading="lazy" style="width: 6px" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 14</span><span><b>Konzeptskizze</b> Erste Gedanken zur Hofsituation, Erschließung und Bühne.</span></figcaption>
+      </figure>
+    </div>
+
+  </div>
+
+  <div class="exp-foot"><a href="#" data-goto="glaspalast">← 01 Glaspalast Erlangen</a><a href="#" data-goto="bachelor">Weiter — 03 Bachelorarbeit →</a></div>
+</template>
+
+<template id="proj-bachelor">
+  <div class="exp-head">
+    <span class="crumb">03 / 03 — Bachelorarbeit</span>
+    <button class="close-btn" data-close><span>Schließen</span><span class="x"></span></button>
+  </div>
+
+  <div class="ged">
+
+    <!-- Title -->
+    <div class="ged-row ged-title">
+      <figure class="ged-fig hand">
+        <img src="assets/img/b/header.jpg" alt="Im Prozess: Bachelorarbeit" loading="lazy" style="width: 400px" />
+      </figure>
+      <div class="meta">
+        <p class="kick">Projekt 03 / 03 — Im Prozess</p>
+        <dl>
+          <div><dt>Status</dt><dd>Im Prozess</dd></div>
+          <div><dt>Ort</dt><dd>Coburg, DE</dd></div>
+          <div><dt>Abgabe</dt><dd>Juli 2026</dd></div>
+          <div><dt>Betreuung</dt><dd>Prof. Anika Neubauer · Prof. Anja Ohliger</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Concept + first model -->
+    <div class="ged-row">
+      <div class="ged-text c1-5">
+        <p class="kick">Konzept — Transformation Aquaria</p>
+        <p>Das Coburger Schwimmbad <em>Aquaria</em> steht nach Fertigstellung des Ersatzneubaus zur Disposition. Statt Abriss: eine Zukunftsvision. Die Arbeit transformiert das Bad als übertragbare Typologie zu einem dritten Ort für Jugendliche und junge Erwachsene — mit Fokus auf den partizipativen Prozess der Aneignung durch lokale Akteur:innen.</p>
+        <p>Damit der Abriss langfristig verhindert wird, müssen lokale Akteur:innen schon im Umbau mitwirken. Entworfen wird kein Endzustand, sondern eine Entwicklung in Phasen — Materialien werden sichtbar wiederverwendet, der Umbau nach außen getragen. <em>Soyez réalistes — demandez l'impossible.</em></p>
+      </div>
+      <figure class="ged-fig c7-12">
+        <img src="assets/img/b/model-site1.jpg" alt="Städtebauliches Modell" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 01</span><span><b>Städtebau</b> Das Aquaria-Areal im Stadtgefüge von Coburg.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Big sectional model -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-12">
+        <img src="assets/img/b/model-hall.jpg" alt="Modell der Schwimmhalle" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 02</span><span><b>Bestandsmodell</b> Die Schwimmhalle als robuste Tragstruktur — Ausgangspunkt der Transformation.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Site plan + collage -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-7">
+        <img src="assets/img/b/lageplan.jpg" alt="Lageplan" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 03</span><span><b>Lageplan</b> Neues Schwimmbad, Fußgänger- &amp; Fahrradstraße und das Aquaria-Areal an der Itz.</span></figcaption>
+      </figure>
+      <figure class="ged-fig c8-12 offset-lg">
+        <img src="assets/img/b/collage.jpg" alt="Collage Aneignung" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 04</span><span><b>Atmosphäre</b> Collage der Aneignung — Baden, Bauen, Begegnen.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Program explosion + Schnittstelle text -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-6">
+        <img src="assets/img/b/programm.jpg" alt="Programmdiagramm Schnittstelle zur Stadt" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 05</span><span><b>Schnittstelle zur Stadt</b> Materiallager, Ateliers, Residency-Wohnen, Bühne, Bibliothek — Bausteine der Transformation.</span></figcaption>
+      </figure>
+      <div class="ged-text c8-12 offset-lg">
+        <p class="kick">Plattform zum Vernetzen &amp; Verändern</p>
+        <p>Das Aquaria wird zur Plattform — Grundlage für jede weitere Transformation. Ateliers und Werkstätten verbinden Kunst und Stadt, ein Residency-Programm bringt externes Know-how, das Materiallager macht das Bad zur urbanen Mine für zirkuläres Bauen.</p>
+        <p>Bühne, Bibliothek, Kletterturm und geschützte Grünflächen ergänzen den öffentlichen Ort — Schritt für Schritt angeeignet.</p>
+      </div>
+    </div>
+
+    <!-- Ground floor plan full width -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-12">
+        <img src="assets/img/b/grundriss.jpg" alt="Grundriss Erdgeschoss" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 06</span><span><b>Grundriss</b> Ankommen &amp; Ausstellen, Werkstatt, Versammlungsraum, Wohnen und das umgenutzte Becken.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Construction isometry + second model -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-5">
+        <img src="assets/img/b/konstruktion.jpg" alt="Konstruktionsisometrie" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 07</span><span><b>Konstruktion</b> Schichtenaufbau von Dach, Tragwerk und Bestand.</span></figcaption>
+      </figure>
+      <figure class="ged-fig c7-12 offset-md">
+        <img src="assets/img/b/model-site2.jpg" alt="Städtebauliches Modell, Detail" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 08</span><span><b>Modell</b> Das Areal im Kontext der angrenzenden Quartiere.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Phases narrative -->
+    <div class="ged-row">
+      <div class="ged-text c2-11">
+        <p class="kick">Entwicklung in Phasen</p>
+        <div class="phases">
+          <div class="phase">
+            <div><div class="pn">Phase 01</div></div>
+            <div>
+              <div class="pt">Aktivierung</div>
+              <div class="pw">Bauzeit 2031–2032</div>
+              <p>Die Schnittstelle zur Stadt wird zur Plattform des Austauschs für Menschen und Institutionen der Umgebung — Grundlage für alles Weitere. Kunstschaffende, Forschende und Aktivist:innen können temporär dort wohnen.</p>
+            </div>
+          </div>
+          <div class="phase">
+            <div><div class="pn">Phase 02a</div></div>
+            <div>
+              <div class="pt">Aneignung</div>
+              <div class="pw">ab 2032 · selbst-initiiert, im laufenden Betrieb</div>
+              <p>Im abgesteckten Rahmen eröffnet sich das Bad als Möglichkeitsraum für selbst-initiierte Umbauten, Interventionen und Projekte.</p>
+            </div>
+          </div>
+          <div class="phase">
+            <div><div class="pn">Phase 02b</div></div>
+            <div>
+              <div class="pt">Transformation</div>
+              <div class="pw">ab 2032 · größere Eingriffe im laufenden Betrieb</div>
+              <p>Langfristig eröffnen sich neue Perspektiven — große bauliche Eingriffe oder genossenschaftliches Wohnen, entstanden aus dem fortwährenden Austausch der Akteur:innen mit der Umgebung.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline full width -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-12">
+        <img src="assets/img/b/zeitstrahl.jpg" alt="Zeitstrahl der Transformation" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 09</span><span><b>Zeitstrahl</b> Von der temporären Bespielung 2028 bis zur baulichen Umsetzung — ein Prozess über Jahre.</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Closing elevation -->
+    <div class="ged-row">
+      <figure class="ged-fig c1-12">
+        <img src="assets/img/b/ansicht.jpg" alt="Ansicht mit Veste Coburg" loading="lazy" />
+        <figcaption class="ged-cap"><span class="abb">Abb. 10</span><span><b>Ansicht</b> Das transformierte Aquaria vor der Coburger Landschaft — Sommerfest inklusive.</span></figcaption>
+      </figure>
+    </div>
+
+  </div>
+
+  <div class="exp-foot"><a href="#" data-goto="kloster">← 02 Kloster Mönchröden</a><a href="#" data-close>↑ Zurück zum Index</a></div>
+</template>
+
+<div class="cursor-chip" id="chip">Projekt öffnen</div>
+
+<script>
+// ---------- routing ----------
+const routes = ['start', 'baustelle', 'ueber', 'kontakt'];
+function setRoute(name) {
+  if (!routes.includes(name)) name = 'start';
+  for (const r of routes) document.getElementById('page-' + r).classList.toggle('active', r === name);
+  document.querySelectorAll('nav.primary a, .brand').forEach(a => {
+    if (a.dataset.route) a.classList.toggle('active', a.dataset.route === name);
+  });
+  if (location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', () => setRoute(location.hash.slice(1)));
+setRoute(location.hash.slice(1) || 'start');
+
+// header scrolled state
+const header = document.getElementById('header');
+const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// ---------- project meta ----------
+const PROJECTS = {
+  glaspalast: { n: 'Projekt 01', name: 'Glaspalast Erlangen', meta: '2025/26 · Erlangen' },
+  kloster:    { n: 'Projekt 02', name: 'Kloster Mönchröden',  meta: '2025/26 · Mönchröden' },
+  bachelor:   { n: 'Projekt 03', name: 'Bachelorarbeit',      meta: '2026 · Coburg' },
+};
+
+// ---------- pennant chains config ----------
+// Each chain = one project. anchors as fractions of the stage.
+const CHAINS = [
+  {
+    id: 'glaspalast',
+    anchors: [{ x: -0.16, y: 0.03 }, { x: 1.12, y: 0.005 }],
+    pennants: [
+      { type: 'img', slot: 'pen-glas-1', src: (window.__resources&&window.__resources.penGlas1)||'assets/img/glaspalast-1.jpg', at: 0.10, w: 112, h: 134, placeholder: 'Glaspalast' },
+      { type: 'deco', tone: 'orange', at: 0.26, w: 36, h: 48 },
+      { type: 'img', slot: 'pen-glas-2', src: (window.__resources&&window.__resources.penGlas2)||'assets/img/glaspalast-2.jpg', at: 0.43, w: 124, h: 140, placeholder: 'Hof' },
+      { type: 'deco', tone: 'black', at: 0.59, w: 30, h: 42 },
+      { type: 'img', slot: 'pen-glas-3', src: (window.__resources&&window.__resources.penGlas3)||'assets/img/glaspalast-3.jpg', at: 0.74, w: 104, h: 124, placeholder: 'Lageplan' },
+      { type: 'deco', tone: 'orange', at: 0.89, w: 42, h: 56 },
+    ],
+  },
+  {
+    id: 'kloster',
+    anchors: [{ x: -0.10, y: 0.26 }, { x: 1.14, y: 0.32 }],
+    pennants: [
+      { type: 'deco', tone: 'black', at: 0.09, w: 32, h: 44 },
+      { type: 'img', slot: 'pen-kloster-1', src: (window.__resources&&window.__resources.penKloster1)||'assets/img/kloster-modell.jpg', at: 0.25, w: 120, h: 138, placeholder: 'Modell' },
+      { type: 'deco', tone: 'orange', at: 0.42, w: 38, h: 50 },
+      { type: 'img', slot: 'pen-kloster-2', src: (window.__resources&&window.__resources.penKloster2)||'assets/img/kloster-innen.jpg', at: 0.60, w: 108, h: 128, placeholder: 'Innenraum' },
+      { type: 'img', slot: 'pen-kloster-3', src: (window.__resources&&window.__resources.penKloster3)||'assets/img/kloster-skizze.jpg', at: 0.85, w: 122, h: 140, placeholder: 'Skizze' },
+    ],
+  },
+  {
+    id: 'bachelor',
+    anchors: [{ x: -0.15, y: 0.51 }, { x: 1.10, y: 0.45 }],
+    pennants: [
+      { type: 'img', slot: 'pen-bach-1', src: (window.__resources&&window.__resources.penBach1)||'assets/img/b/model-site1.jpg', at: 0.12, w: 106, h: 126, placeholder: 'Modell' },
+      { type: 'deco', tone: 'orange', at: 0.29, w: 34, h: 46 },
+      { type: 'img', slot: 'pen-bach-2', src: (window.__resources&&window.__resources.penBach2)||'assets/img/b/collage.jpg', at: 0.47, w: 122, h: 140, placeholder: 'Collage' },
+      { type: 'deco', tone: 'black', at: 0.64, w: 40, h: 54 },
+      { type: 'img', slot: 'pen-bach-3', src: (window.__resources&&window.__resources.penBach3)||'assets/img/b/model-hall.jpg', at: 0.82, w: 110, h: 130, placeholder: 'Modell' },
+    ],
+  },
+];
+
+// ---------- init pennants ----------
+const hoverTitle = document.getElementById('hoverTitle');
+const htKicker = document.getElementById('htKicker');
+const htName = document.getElementById('htName');
+const htMeta = document.getElementById('htMeta');
+const chip = document.getElementById('chip');
+
+function showTitle(id) {
+  const p = PROJECTS[id]; if (!p) return;
+  htKicker.textContent = p.n; htName.textContent = p.name; htMeta.textContent = p.meta;
+  hoverTitle.classList.add('show');
+  document.getElementById('hero').classList.add('has-hover');
+}
+function hideTitle() { hoverTitle.classList.remove('show'); document.getElementById('hero').classList.remove('has-hover'); }
+
+initPennants({
+  stage: '#stage',
+  svg: '#cords',
+  chains: CHAINS,
+  onHover: (cfg, mx, my) => { showTitle(cfg.id); chip.classList.add('show'); chip.style.left = mx+'px'; chip.style.top = my+'px'; },
+  onMove: (id, mx, my) => { chip.style.left = mx+'px'; chip.style.top = my+'px'; },
+  onLeave: () => { hideTitle(); chip.classList.remove('show'); },
+  onClick: (cfg) => openProject(cfg.id),
+});
+
+// ---------- project detail expander ----------
+let openExpander = null;
+
+function openProject(projectId, fromRect) {
+  if (openExpander) return;
+  const tpl = document.getElementById('proj-' + projectId);
+  if (!tpl) return;
+  const rect = fromRect || { top: window.innerHeight*0.4, left: window.innerWidth*0.3, width: window.innerWidth*0.4, height: 80 };
+  const exp = document.createElement('div');
+  exp.className = 'expander';
+  exp.style.top = rect.top + 'px';
+  exp.style.left = rect.left + 'px';
+  exp.style.width = rect.width + 'px';
+  exp.style.height = rect.height + 'px';
+  const inner = document.createElement('div');
+  inner.className = 'expander-inner';
+  inner.appendChild(tpl.content.cloneNode(true));
+  exp.appendChild(inner);
+  document.body.appendChild(exp);
+  exp._origin = rect;
+  requestAnimationFrame(() => {
+    exp.classList.add('opening');
+    requestAnimationFrame(() => exp.classList.add('open'));
+  });
+  document.body.style.overflow = 'hidden';
+  openExpander = exp;
+
+  inner.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', (e) => { e.preventDefault(); collapse(); }));
+  inner.querySelectorAll('[data-goto]').forEach(b => b.addEventListener('click', (e) => {
+    e.preventDefault();
+    const next = b.dataset.goto;
+    collapse(() => openProject(next));
+  }));
+  chip.classList.remove('show');
+  hideTitle();
+}
+
+function collapse(after) {
+  if (!openExpander) { if (after) after(); return; }
+  const exp = openExpander;
+  const rect = exp._origin;
+  exp.classList.remove('open');
+  exp.classList.add('closing');
+  exp.style.top = rect.top + 'px';
+  exp.style.left = rect.left + 'px';
+  exp.style.width = rect.width + 'px';
+  exp.style.height = rect.height + 'px';
+  document.body.style.overflow = '';
+  openExpander = null;
+  setTimeout(() => { exp.remove(); if (after) after(); }, 640);
+}
+
+// index rows open from their own rect
+document.getElementById('projList').addEventListener('click', (e) => {
+  const row = e.target.closest('.proj-row');
+  if (!row) return;
+  openProject(row.dataset.project, row.getBoundingClientRect());
+});
+
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') collapse(); });
+</script>
+
+<template id="__bundler_thumbnail" data-bg-color="#ffffff">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#ffffff"/>
+    <!-- pennant cord -->
+    <path d="M 80 250 Q 600 360 1120 250" fill="none" stroke="#0c0c0c" stroke-width="5"/>
+    <!-- pennants hanging -->
+    <polygon points="300,290 392,290 346,400" fill="#0c0c0c"/>
+    <polygon points="470,318 540,318 505,402" fill="#F7753F"/>
+    <polygon points="650,330 760,330 705,470" fill="#0c0c0c"/>
+    <polygon points="840,318 910,318 875,402" fill="#F7753F"/>
+    <!-- wordmark -->
+    <text x="600" y="560" font-family="Helvetica, Arial, sans-serif" font-size="92" font-weight="700" letter-spacing="-3" text-anchor="middle" fill="#0c0c0c">Ana</text>
+    <circle cx="742" cy="535" r="13" fill="#F7753F"/>
+    <text x="600" y="630" font-family="Helvetica, Arial, sans-serif" font-size="30" letter-spacing="6" text-anchor="middle" fill="#0c0c0c">PARAMINSKI</text>
+  </svg>
+</template>
+
+</body>
+</html>

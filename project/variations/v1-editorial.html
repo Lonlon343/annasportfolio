@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<title>Anna — Architektur</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="../assets/base.css" />
+<script src="../assets/image-slot.js"></script>
+<style>
+:root {
+  --paper: #f6f4ef;
+  --ink: #111111;
+  --rule: rgba(17,17,17,0.18);
+  --soft: rgba(17,17,17,0.55);
+}
+
+body { font-size: 16px; }
+
+[data-screen-label] { display: contents; }
+
+/* ---- Header ---- */
+header.site {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+  z-index: 50;
+}
+
+.brand {
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+nav.primary {
+  display: flex;
+  gap: 36px;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+nav.primary a {
+  position: relative;
+  padding: 6px 0;
+  color: var(--soft);
+  transition: color .25s ease;
+}
+nav.primary a:hover, nav.primary a.active { color: var(--ink); }
+nav.primary a.active::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -4px 0;
+  height: 1px;
+  background: var(--ink);
+}
+
+/* ---- Page wrapper ---- */
+main {
+  padding-top: 72px;
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+/* ---- Landing intro ---- */
+.intro {
+  padding: 140px 48px 120px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: end;
+}
+
+.intro .eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin: 0 0 24px;
+}
+
+.intro h1 {
+  font-weight: 400;
+  font-size: clamp(40px, 5.6vw, 88px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.intro .lede {
+  font-size: 19px;
+  line-height: 1.55;
+  max-width: 44ch;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: pretty;
+}
+.intro .lede em { font-style: normal; color: var(--soft); }
+
+/* ---- Project Index ---- */
+.index-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 48px;
+  max-width: 1400px;
+  margin: 0 auto 8px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 14px;
+}
+
+.projects {
+  max-width: 1400px;
+  margin: 0 auto 160px;
+  padding: 0 48px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 80px 1fr 220px 220px 60px;
+  align-items: baseline;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  position: relative;
+  transition: padding .25s ease, opacity .25s ease;
+}
+
+.row:hover { padding-left: 12px; }
+.row:hover .row-title { letter-spacing: -0.005em; }
+
+.row-num {
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: var(--soft);
+}
+
+.row-title {
+  font-size: clamp(28px, 3.6vw, 52px);
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  line-height: 1;
+  transition: letter-spacing .3s ease;
+}
+
+.row-meta {
+  font-size: 14px;
+  color: var(--soft);
+  letter-spacing: 0.02em;
+}
+
+.row-marker {
+  justify-self: end;
+  width: 32px; height: 32px;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  transition: border-color .25s ease, background .25s ease, color .25s ease;
+  font-size: 16px;
+  color: var(--soft);
+}
+.row:hover .row-marker {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+/* ---- Expanded overlay ---- */
+.expander {
+  position: fixed;
+  z-index: 100;
+  background: var(--paper);
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.expander.opening, .expander.open { pointer-events: auto; opacity: 1; }
+.expander.open {
+  inset: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  left: 0 !important;
+  top: 0 !important;
+  transition: inset .65s cubic-bezier(.7,.0,.2,1), top .65s cubic-bezier(.7,.0,.2,1), left .65s cubic-bezier(.7,.0,.2,1), width .65s cubic-bezier(.7,.0,.2,1), height .65s cubic-bezier(.7,.0,.2,1);
+}
+.expander.closing {
+  transition: inset .55s cubic-bezier(.7,.0,.2,1), top .55s cubic-bezier(.7,.0,.2,1), left .55s cubic-bezier(.7,.0,.2,1), width .55s cubic-bezier(.7,.0,.2,1), height .55s cubic-bezier(.7,.0,.2,1), opacity .25s ease .3s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.expander-inner {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  opacity: 0;
+  transition: opacity .35s ease .25s;
+}
+.expander.open .expander-inner { opacity: 1; }
+
+.exp-head {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 48px;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+  z-index: 5;
+}
+.exp-head .crumb {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.close-btn {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.close-btn::before {
+  content: "";
+  width: 14px; height: 14px;
+  background:
+    linear-gradient(currentColor,currentColor) center/100% 1px no-repeat,
+    linear-gradient(currentColor,currentColor) center/1px 100% no-repeat;
+  transform: rotate(45deg);
+}
+
+.exp-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  padding: 80px 48px 60px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.exp-hero h2 {
+  font-size: clamp(48px, 6vw, 96px);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  margin: 0;
+  text-wrap: balance;
+}
+.exp-hero .meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 24px;
+  align-self: end;
+  font-size: 14px;
+}
+.meta-grid dt {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin: 0 0 4px;
+}
+.meta-grid dd { margin: 0; }
+
+.exp-cover {
+  width: 100%;
+  height: 64vh;
+  min-height: 480px;
+  display: block;
+}
+
+.exp-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 48px 40px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+}
+.exp-body .label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+.exp-body p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0 0 1em;
+  text-wrap: pretty;
+}
+
+.process {
+  padding: 60px 48px 120px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.process h3 {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin: 0 0 32px;
+  font-weight: 400;
+}
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+}
+.process-grid > * { aspect-ratio: 3/4; }
+.process-grid > *:nth-child(1) { grid-column: span 3; aspect-ratio: 4/3; }
+.process-grid > *:nth-child(2) { grid-column: span 3; aspect-ratio: 4/3; }
+.process-grid > *:nth-child(3) { grid-column: span 2; }
+.process-grid > *:nth-child(4) { grid-column: span 2; }
+.process-grid > *:nth-child(5) { grid-column: span 2; }
+
+.exp-foot {
+  border-top: 1px solid var(--rule);
+  padding: 40px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--soft);
+}
+
+/* ---- Über uns page ---- */
+.cv {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 140px 48px 160px;
+}
+
+.cv-head {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  margin-bottom: 120px;
+  align-items: end;
+}
+.cv-head h1 {
+  font-weight: 400;
+  font-size: clamp(48px, 6vw, 96px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+.cv-head .eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin-bottom: 12px;
+}
+.cv-head p {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 50ch;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.cv-portrait {
+  width: 220px;
+  aspect-ratio: 3/4;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.cv-section {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 80px;
+  padding: 40px 0;
+  border-top: 1px solid var(--rule);
+}
+.cv-section h2 {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--soft);
+  margin: 0;
+  padding-top: 6px;
+}
+
+.cv-list { display: grid; gap: 28px; }
+.cv-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  align-items: baseline;
+}
+.cv-item .when {
+  font-size: 14px;
+  color: var(--soft);
+  letter-spacing: 0.02em;
+}
+.cv-item .what {
+  font-size: 18px;
+  line-height: 1.45;
+}
+.cv-item .what .role { display: block; font-size: 14px; color: var(--soft); margin-top: 4px; }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 60px;
+}
+.skill-block .label {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin-bottom: 8px;
+}
+.skill-block .val { font-size: 18px; line-height: 1.45; }
+
+.langs {
+  display: grid;
+  gap: 14px;
+}
+.lang-row {
+  display: grid;
+  grid-template-columns: 1fr 100px 220px;
+  align-items: center;
+  font-size: 16px;
+}
+.lang-row .lvl { color: var(--soft); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+.lang-row .bar {
+  height: 1px;
+  background: var(--rule);
+  position: relative;
+}
+.lang-row .bar::after {
+  content: "";
+  position: absolute;
+  inset: -1px auto auto 0;
+  height: 3px;
+  background: var(--ink);
+  width: var(--p, 50%);
+}
+
+.contact-block {
+  display: grid;
+  gap: 12px;
+  font-size: 18px;
+}
+.contact-block a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---- Footer ---- */
+footer.site {
+  border-top: 1px solid var(--rule);
+  padding: 40px 48px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--soft);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 900px) {
+  header.site { padding: 0 24px; height: 60px; }
+  main { padding-top: 60px; }
+  .intro { grid-template-columns: 1fr; padding: 80px 24px 60px; gap: 32px; }
+  .index-label, .projects { padding-left: 24px; padding-right: 24px; }
+  .row { grid-template-columns: 50px 1fr 40px; padding: 24px 0; }
+  .row-meta { display: none; }
+  .exp-hero { grid-template-columns: 1fr; padding: 60px 24px 32px; gap: 24px; }
+  .exp-body { grid-template-columns: 1fr; padding: 40px 24px; gap: 24px; }
+  .process-grid { grid-template-columns: repeat(2,1fr); }
+  .process-grid > * { grid-column: span 1 !important; aspect-ratio: 4/3 !important; }
+  .cv { padding: 80px 24px; }
+  .cv-head, .cv-section { grid-template-columns: 1fr; gap: 24px; margin-bottom: 60px; padding: 24px 0; }
+  .cv-item { grid-template-columns: 1fr; gap: 4px; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .lang-row { grid-template-columns: 1fr 80px; }
+  .lang-row .bar { display: none; }
+  footer.site { padding: 24px; flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="#projekte" data-route="projekte">Anna</a>
+  <nav class="primary">
+    <a href="#projekte" data-route="projekte" class="active">Projekte</a>
+    <a href="#ueber" data-route="ueber">Über uns</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============ PROJEKTE ============ -->
+<section class="page active" id="page-projekte" data-screen-label="01 Projekte (Editorial)">
+  <div class="intro">
+    <div>
+      <p class="eyebrow">Architektur — B.A. Coburg</p>
+      <h1>Drei Arbeiten<br />aus dem Studium.</h1>
+    </div>
+    <p class="lede">Ana Paraminski, Studentin der Architektur an der Hochschule&nbsp;Coburg. <em>Eine kuratierte Auswahl aktueller Projekte — vom Glaspalast in Erlangen bis zur laufenden Bachelorarbeit.</em></p>
+  </div>
+
+  <div class="index-label">
+    <span>Index</span>
+    <span>2024 — 2026</span>
+  </div>
+
+  <div class="projects" id="projectList">
+
+    <div class="row" data-project="glaspalast">
+      <div class="row-num">01 / 03</div>
+      <div class="row-title">Glaspalast Erlangen</div>
+      <div class="row-meta">2024</div>
+      <div class="row-meta">Erlangen, DE</div>
+      <div class="row-marker">+</div>
+    </div>
+
+    <div class="row" data-project="kloster">
+      <div class="row-num">02 / 03</div>
+      <div class="row-title">Kloster Mönchröden</div>
+      <div class="row-meta">2025</div>
+      <div class="row-meta">Mönchröden, DE</div>
+      <div class="row-marker">+</div>
+    </div>
+
+    <div class="row" data-project="bachelor">
+      <div class="row-num">03 / 03</div>
+      <div class="row-title">Bachelorarbeit</div>
+      <div class="row-meta">2026</div>
+      <div class="row-meta">In Arbeit</div>
+      <div class="row-marker">+</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ÜBER UNS ============ -->
+<section class="page" id="page-ueber" data-screen-label="02 Über uns (Editorial)">
+  <div class="cv">
+    <div class="cv-head">
+      <div>
+        <p class="eyebrow">Über uns</p>
+        <h1>Ana<br />Paraminski.</h1>
+      </div>
+      <div>
+        <image-slot id="anna-portrait-v1" class="cv-portrait" shape="rect" placeholder="Portrait"></image-slot>
+        <p>Architektur, geboren aus dem Bauen mit den Händen — von der Baustelle bis zum Wettbewerbsmodell. Im siebten Semester an der Hochschule Coburg, derzeit in der Bachelorarbeit.</p>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Ausbildung</h2>
+      <div class="cv-list">
+        <div class="cv-item">
+          <div class="when">Okt 2022 — Jul 2026</div>
+          <div class="what">Architektur, B.A.<span class="role">Hochschule Coburg</span></div>
+        </div>
+        <div class="cv-item">
+          <div class="when">2014 — 2022</div>
+          <div class="what">Abitur<span class="role">Helene-Lange-Gymnasium Fürth</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Berufserfahrung</h2>
+      <div class="cv-list">
+        <div class="cv-item">
+          <div class="when">Apr 2025 — Aug 2026</div>
+          <div class="what">Stud. Hilfskraft, International Office<span class="role">Hochschule Coburg — Eventplanung &amp; -durchführung, interkulturelle Kompetenzen</span></div>
+        </div>
+        <div class="cv-item">
+          <div class="when">Okt 2024 — Mär 2025</div>
+          <div class="what">Praktikum<span class="role">HOLODECK architects ZT GmbH, Wien — Architekturwettbewerbe, Ausstellungsplanung &amp; -gestaltung</span></div>
+        </div>
+        <div class="cv-item">
+          <div class="when">Feb 2024 — Mär 2024</div>
+          <div class="what">Baustellenpraktikum<span class="role">Holzbau Wunner, Emskirchen — Zimmererarbeiten, Denkmalsanierung</span></div>
+        </div>
+        <div class="cv-item">
+          <div class="when">Aug 2023 — Sep 2023</div>
+          <div class="what">Baustellenpraktikum<span class="role">GS Schenk, Fürth — hoch- und tiefbauliche Arbeiten (viel Beton)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Auszeichnungen<br />&amp; Engagement</h2>
+      <div class="cv-list">
+        <div class="cv-item">
+          <div class="when">Apr 2024 — Sep 2026</div>
+          <div class="what">Deutschlandstipendium<span class="role">Stipendiatin</span></div>
+        </div>
+        <div class="cv-item">
+          <div class="when">Aug 2023 — Jul 2024</div>
+          <div class="what">Dienstagsreihe Coburg<span class="role">Organisationsleitung — dienstagsreihe-coburg.de</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Kenntnisse</h2>
+      <div class="skills-grid">
+        <div class="skill-block">
+          <div class="label">CAD</div>
+          <div class="val">ArchiCAD, AutoCAD</div>
+        </div>
+        <div class="skill-block">
+          <div class="label">BIM</div>
+          <div class="val">BIMmTool</div>
+        </div>
+        <div class="skill-block">
+          <div class="label">Grafik</div>
+          <div class="val">Adobe Creative Cloud, Affinity Suite</div>
+        </div>
+        <div class="skill-block">
+          <div class="label">Office</div>
+          <div class="val">Microsoft Office</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Sprachen</h2>
+      <div class="langs">
+        <div class="lang-row"><span>Deutsch</span><span class="lvl">muttersprachlich</span><span class="bar" style="--p:100%"></span></div>
+        <div class="lang-row"><span>Kroatisch</span><span class="lvl">fast muttersprachlich</span><span class="bar" style="--p:92%"></span></div>
+        <div class="lang-row"><span>Englisch</span><span class="lvl">C1</span><span class="bar" style="--p:75%"></span></div>
+        <div class="lang-row"><span>Spanisch</span><span class="lvl">B1</span><span class="bar" style="--p:55%"></span></div>
+        <div class="lang-row"><span>Französisch</span><span class="lvl">B1</span><span class="bar" style="--p:55%"></span></div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h2>Kontakt</h2>
+      <div class="contact-block">
+        <a href="mailto:paraminskiana@gmail.com">paraminskiana@gmail.com</a>
+        <a href="tel:+4917680669800">+49 176 80669800</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <span>© 2026 Ana Paraminski</span>
+  <span>Coburg / Fürth</span>
+</footer>
+
+<!-- ============ PROJECT DATA ============ -->
+<template id="proj-glaspalast">
+  <div class="exp-head">
+    <span class="crumb">01 / 03 — Projekte</span>
+    <button class="close-btn" data-close>Schließen</button>
+  </div>
+  <div class="exp-hero">
+    <h2>Glaspalast<br />Erlangen.</h2>
+    <dl class="meta-grid">
+      <div><dt>Jahr</dt><dd>2024</dd></div>
+      <div><dt>Ort</dt><dd>Erlangen, DE</dd></div>
+      <div><dt>Programm</dt><dd>Studienarbeit, Hochschule Coburg</dd></div>
+      <div><dt>Typologie</dt><dd>Bestand &amp; Erweiterung</dd></div>
+      <div><dt>Fläche</dt><dd>—</dd></div>
+      <div><dt>Betreuung</dt><dd>—</dd></div>
+    </dl>
+  </div>
+  <image-slot id="glaspalast-cover" class="exp-cover" shape="rect" placeholder="Hauptbild — Außenperspektive"></image-slot>
+  <div class="exp-body">
+    <div class="label">Konzept</div>
+    <div>
+      <p>Eine Auseinandersetzung mit dem Glaspalast Erlangen — der Versuch, das industrielle Bestandsgefüge mit einer zeitgemäßen Nutzung zu verweben, ohne den vorhandenen Charakter zu glätten. Konstruktion bleibt sichtbar; das Glas wird zur Membran zwischen Innen und Stadtraum.</p>
+      <p><em>Platzhaltertext — Anna kann hier den finalen Projektbeschrieb einsetzen.</em></p>
+    </div>
+  </div>
+  <div class="process">
+    <h3>Prozess — Skizzen, Modelle, Pläne</h3>
+    <div class="process-grid">
+      <image-slot id="glaspalast-p1" shape="rect" placeholder="Lageplan"></image-slot>
+      <image-slot id="glaspalast-p2" shape="rect" placeholder="Schnitt"></image-slot>
+      <image-slot id="glaspalast-p3" shape="rect" placeholder="Modell"></image-slot>
+      <image-slot id="glaspalast-p4" shape="rect" placeholder="Detail"></image-slot>
+      <image-slot id="glaspalast-p5" shape="rect" placeholder="Innenraum"></image-slot>
+    </div>
+  </div>
+  <div class="exp-foot">
+    <span>↑ zurück zum Index</span>
+    <span>Weiter — 02 Kloster Mönchröden →</span>
+  </div>
+</template>
+
+<template id="proj-kloster">
+  <div class="exp-head">
+    <span class="crumb">02 / 03 — Projekte</span>
+    <button class="close-btn" data-close>Schließen</button>
+  </div>
+  <div class="exp-hero">
+    <h2>Kloster<br />Mönchröden.</h2>
+    <dl class="meta-grid">
+      <div><dt>Jahr</dt><dd>2025</dd></div>
+      <div><dt>Ort</dt><dd>Mönchröden, DE</dd></div>
+      <div><dt>Programm</dt><dd>Entwurf, Hochschule Coburg</dd></div>
+      <div><dt>Typologie</dt><dd>Denkmal &amp; Umnutzung</dd></div>
+      <div><dt>Fläche</dt><dd>—</dd></div>
+      <div><dt>Betreuung</dt><dd>—</dd></div>
+    </dl>
+  </div>
+  <image-slot id="kloster-cover" class="exp-cover" shape="rect" placeholder="Hauptbild — Außenperspektive"></image-slot>
+  <div class="exp-body">
+    <div class="label">Konzept</div>
+    <div>
+      <p>Eine behutsame Umnutzung des ehemaligen Klosters Mönchröden — der historische Bestand wird zum Träger neuer Nutzungen. Eingriffe sind minimal, aber präzise; das Bauen im Bestand verstanden als ein Hinzufügen, nicht als ein Überschreiben.</p>
+      <p><em>Platzhaltertext — Anna kann hier den finalen Projektbeschrieb einsetzen.</em></p>
+    </div>
+  </div>
+  <div class="process">
+    <h3>Prozess — Skizzen, Modelle, Pläne</h3>
+    <div class="process-grid">
+      <image-slot id="kloster-p1" shape="rect" placeholder="Lageplan"></image-slot>
+      <image-slot id="kloster-p2" shape="rect" placeholder="Schnitt"></image-slot>
+      <image-slot id="kloster-p3" shape="rect" placeholder="Modell"></image-slot>
+      <image-slot id="kloster-p4" shape="rect" placeholder="Detail"></image-slot>
+      <image-slot id="kloster-p5" shape="rect" placeholder="Innenraum"></image-slot>
+    </div>
+  </div>
+  <div class="exp-foot">
+    <span>← zurück — 01 Glaspalast Erlangen</span>
+    <span>Weiter — 03 Bachelorarbeit →</span>
+  </div>
+</template>
+
+<template id="proj-bachelor">
+  <div class="exp-head">
+    <span class="crumb">03 / 03 — Projekte</span>
+    <button class="close-btn" data-close>Schließen</button>
+  </div>
+  <div class="exp-hero">
+    <h2>Bachelor<wbr />arbeit.</h2>
+    <dl class="meta-grid">
+      <div><dt>Jahr</dt><dd>2026</dd></div>
+      <div><dt>Status</dt><dd>In Arbeit</dd></div>
+      <div><dt>Programm</dt><dd>Bachelor Thesis, HS Coburg</dd></div>
+      <div><dt>Typologie</dt><dd>Wird folgen</dd></div>
+      <div><dt>Abgabe</dt><dd>Jul 2026</dd></div>
+      <div><dt>Betreuung</dt><dd>—</dd></div>
+    </dl>
+  </div>
+  <image-slot id="bachelor-cover" class="exp-cover" shape="rect" placeholder="Bilder folgen — Bachelorarbeit in Arbeit"></image-slot>
+  <div class="exp-body">
+    <div class="label">In Arbeit</div>
+    <div>
+      <p>Die Bachelorarbeit entsteht im Sommersemester 2026. Erste Skizzen, Recherchen und Modelle werden im Laufe der Bearbeitung hier ergänzt.</p>
+      <p><em>Diese Seite wächst mit dem Projekt — Bilder und Beschreibung kommen demnächst.</em></p>
+    </div>
+  </div>
+  <div class="process">
+    <h3>Folgt</h3>
+    <div class="process-grid">
+      <image-slot id="bachelor-p1" shape="rect" placeholder="Folgt"></image-slot>
+      <image-slot id="bachelor-p2" shape="rect" placeholder="Folgt"></image-slot>
+      <image-slot id="bachelor-p3" shape="rect" placeholder="Folgt"></image-slot>
+    </div>
+  </div>
+  <div class="exp-foot">
+    <span>← zurück — 02 Kloster Mönchröden</span>
+    <span>↑ zurück zum Index</span>
+  </div>
+</template>
+
+<script>
+// --- routing
+const routes = ['projekte', 'ueber'];
+function setRoute(name) {
+  if (!routes.includes(name)) name = 'projekte';
+  for (const r of routes) {
+    document.getElementById('page-' + r).classList.toggle('active', r === name);
+  }
+  document.querySelectorAll('nav.primary a, .brand').forEach(a => {
+    if (a.dataset.route) a.classList.toggle('active', a.dataset.route === name);
+  });
+  if (location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', () => setRoute(location.hash.slice(1)));
+setRoute(location.hash.slice(1) || 'projekte');
+
+// --- expand / collapse
+const list = document.getElementById('projectList');
+let openExpander = null;
+
+function expandFromRow(row, projectId) {
+  if (openExpander) return;
+  const tpl = document.getElementById('proj-' + projectId);
+  if (!tpl) return;
+
+  const rect = row.getBoundingClientRect();
+  const exp = document.createElement('div');
+  exp.className = 'expander';
+  exp.style.top = rect.top + 'px';
+  exp.style.left = rect.left + 'px';
+  exp.style.width = rect.width + 'px';
+  exp.style.height = rect.height + 'px';
+
+  const inner = document.createElement('div');
+  inner.className = 'expander-inner';
+  inner.appendChild(tpl.content.cloneNode(true));
+  exp.appendChild(inner);
+  document.body.appendChild(exp);
+
+  // start state — match row
+  // animate to fullscreen
+  requestAnimationFrame(() => {
+    exp.classList.add('opening');
+    requestAnimationFrame(() => {
+      exp.classList.add('open');
+    });
+  });
+
+  document.body.style.overflow = 'hidden';
+  openExpander = { exp, row };
+
+  inner.querySelector('[data-close]')?.addEventListener('click', () => collapse());
+}
+
+function collapse() {
+  if (!openExpander) return;
+  const { exp, row } = openExpander;
+  const rect = row.getBoundingClientRect();
+  exp.classList.remove('open');
+  exp.classList.add('closing');
+  exp.style.top = rect.top + 'px';
+  exp.style.left = rect.left + 'px';
+  exp.style.width = rect.width + 'px';
+  exp.style.height = rect.height + 'px';
+  document.body.style.overflow = '';
+  setTimeout(() => { exp.remove(); }, 700);
+  openExpander = null;
+}
+
+list.addEventListener('click', (e) => {
+  const row = e.target.closest('.row');
+  if (!row) return;
+  expandFromRow(row, row.dataset.project);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && openExpander) collapse();
+});
+</script>
+
+</body>
+</html>
